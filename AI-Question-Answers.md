@@ -1,3 +1,376 @@
+
+1. How PHP works: request-response cycle
+2. Can we work only with PHP
+3. How to embedded HTML with PHP
+4. Database engines, how transaction work
+5. what is microservice and macroservice queues in JS
+6. what is context, parameter
+7. Does LLM holds any memory or database (large dataset)
+8. prompt, hallucination
+9. difference between chat Tool and google search
+
+=======================================================================1
+
+Here are simple interview-friendly answers:
+
+## 1. How PHP works (Request → Response Cycle)
+
+### Flow:
+
+1. User opens a website in browser.
+2. Browser sends a request to web server (Apache/Nginx).
+3. Server finds the PHP file.
+4. PHP code executes on the server.
+5. PHP may read/write data from MySQL.
+6. PHP generates HTML.
+7. HTML is sent back to browser.
+8. Browser displays the page.
+
+### Example
+
+
+<?php
+echo "Hello World";
+?>
+
+
+Browser receives:
+
+html
+Hello World
+
+
+**Important:** PHP runs on the server, not in the browser.
+
+---
+
+## 2. Can we work only with PHP?
+
+**Yes, but with limitations.**
+
+PHP can:
+
+* Handle business logic
+* Connect to database
+* Create APIs
+* Process forms
+
+But modern websites usually need:
+
+| Technology | Purpose          |
+| ---------- | ---------------- |
+| PHP        | Backend          |
+| HTML       | Page structure   |
+| CSS        | Design           |
+| JavaScript | User interaction |
+| MySQL      | Data storage     |
+
+Example:
+
+* PHP saves customer data.
+* HTML shows form.
+* CSS styles form.
+* JavaScript validates form.
+
+---
+
+## 3. How to Embed HTML with PHP?
+
+PHP can be mixed directly with HTML.
+
+### Example
+<h1>Welcome</h1>
+<?php
+$name = "Chandan";
+?>
+<p>Hello <?php echo $name; ?></p>
+
+Output:
+Welcome
+Hello Chandan
+
+### Alternative
+<?= $name ?>
+
+Same as:
+<?php echo $name; ?>
+
+---
+## 4. Database Engines & How Transactions Work
+
+### Common MySQL Engines
+
+InnoDB supports transactions, foreign keys, row-level locking, and crash recovery, making it suitable for modern applications. MyISAM is simpler and can be faster for some read-only workloads, but it does not support transactions or foreign keys and uses table-level locking. Therefore, InnoDB is generally preferred.
+
+| Feature                 | InnoDB               | MyISAM                        |
+| ----------------------- | -------------------- | ----------------------------- |
+| Transactions            | ✅ Supported          | ❌ Not supported               |
+| Rollback (Undo changes) | ✅ Yes                | ❌ No                          |
+| Foreign Keys            | ✅ Yes                | ❌ No                          |
+| Data Safety             | ✅ Better             | ❌ Lower                       |
+| Table Locking           | ❌ Row-level locking  | ✅ Table-level locking         |
+| Read Speed              | Good                 | Often faster for simple reads |
+| Crash Recovery          | ✅ Automatic recovery | ❌ More risk of corruption     |
+
+
+Most projects use **InnoDB**.
+
+### What is a Transaction?
+
+A transaction is a group of SQL statements that should either:
+
+* All succeed
+* Or all fail
+
+### Example: Bank Transfer
+
+sql
+START TRANSACTION;
+
+UPDATE account
+SET balance = balance - 1000
+WHERE id = 1;
+
+UPDATE account
+SET balance = balance + 1000
+WHERE id = 2;
+
+COMMIT;
+If any query fails:
+
+sql
+ROLLBACK;
+
+Money won't be lost.
+
+### Interview Definition
+
+> Transaction ensures data consistency by treating multiple SQL operations as one unit.
+
+---
+
+## 5. What are Microservices, Monolith (Macro Service), and Queues?
+
+### Monolith (Macro Service)
+
+Everything is inside one application.
+
+Example:
+
+
+E-commerce App
+ ├── Login
+ ├── Products
+ ├── Orders
+ └── Payments
+
+
+Single codebase.
+
+### Microservices
+
+Microservices is a software architecture where a large application is divided into many small, independent services, and each service performs a specific business function.
+
+User Service
+Product Service
+Order Service
+Payment Service
+
+Advantages:
+* Independent deployment
+* Easy scaling
+* Better maintainability
+
+### Queue in JS/System Design
+
+Queue is used for background tasks.
+
+Example:
+
+Customer places order.
+
+Instead of:
+Order → Send Email → Generate Invoice → SMS
+User waits.
+
+Use Queue:
+Order Created
+     ↓
+ Queue
+     ↓
+ Worker processes Email/SMS later
+
+Popular:
+
+* Redis Queue
+* RabbitMQ
+* Amazon SQS
+
+---
+
+## 6. What is Context and Parameter?
+
+Context is the information the AI uses to understand your request and generate a relevant response.
+
+Parameter
+Parameters are the internal values (weights) that an AI model learns during training.
+
+Input passed to a function.
+
+javascript
+function greet(name) {
+   console.log(name);
+}
+
+
+`name` is a parameter.
+
+### Context
+
+The environment in which code runs.
+
+JavaScript example:
+
+javascript
+const user = {
+   name: "Chandan",
+   show() {
+      console.log(this.name);
+   }
+}
+
+
+Here `this` refers to current object.
+
+That current object is the context.
+
+
+---
+
+## 7. Does LLM Hold Any Memory or Database?
+
+An LLM has two different kinds of "memory":
+
+Context Window (Temporary Memory):
+----------------------------------
+Remembers the current conversation.
+Uses previous messages to answer follow-up questions.
+Once the conversation ends or the context is removed, that information is no longer available.
+
+Persistent Memory (if a system provides it):
+---------------------------------------------
+Some AI applications can save user preferences or notes separately.
+This is handled by an external memory system, not by the LLM's parameters themselves.
+
+### Short Answer
+No.
+Context Window (Temporary Memory)
+
+LLM does not work like MySQL.
+
+### During Training
+Model learns patterns from huge amounts of text.
+
+After training:
+* Knowledge is stored as weights (numbers)
+* Not as rows and tables
+
+### Example
+
+MySQL:
+
+ID | Name
+1  | Chandan
+
+LLM:
+Does not store data like this.
+It stores learned patterns.
+
+### Memory in ChatGPT
+There can be:
+
+1. Conversation Context
+2. Saved Memory (if enabled)
+3. External Database/Vector DB connected by developers
+
+---
+
+## 8. Prompt and Hallucination
+
+### Prompt
+
+Instruction given to AI.
+
+Example:
+
+
+Explain MySQL JOIN in simple terms.
+
+
+This is a prompt.
+
+### Hallucination
+
+AI generates information that sounds correct but is actually wrong.
+
+Example:
+
+
+Who won Cricket World Cup 2030?
+
+
+AI may invent an answer because the event hasn't happened.
+
+### How to Reduce Hallucination?
+
+* Give clear prompts
+* Provide context
+* Use RAG (database search)
+* Use MCP/tools
+* Verify important answers
+
+---
+
+## 9. Difference Between ChatGPT Tool and Google Search
+
+| ChatGPT              | Google Search                            |
+| -------------------- | ---------------------------------------- |
+| Gives direct answer  | Gives links                              |
+| Understands context  | Keyword search                           |
+| Can summarize        | User reads websites                      |
+| Can write code       | Cannot directly write complete solutions |
+| Can explain concepts | Finds pages containing concepts          |
+
+### Example
+
+Ask:
+
+
+Explain Laravel Middleware.
+
+
+### Google
+
+Returns links:
+
+* Docs
+* Blogs
+* Tutorials
+
+### ChatGPT
+
+Directly explains:
+
+> Middleware is a filter that runs before or after a request. It is used for authentication, logging, etc.
+
+### Best Practice
+
+* Use Google to find sources.
+* Use ChatGPT to understand and summarize.
+
+
+
+=================================
 VectorDB all concept,when to use vector db,when use ,Mysql.
 Ai Inference
 MCP all concept
@@ -11,6 +384,158 @@ AI Overlapping.
 
 
 =====================
+
+What is AI?
+====================
+
+**Interview Question:** What is AI?
+
+**Simple Answer:**
+AI (Artificial Intelligence) is technology that enables computers to perform tasks that normally require human intelligence, such as understanding language, recognizing images, making decisions, and answering questions.
+
+**Example:**
+
+* PHP application calculates tax using fixed rules.
+* AI application can analyze customer behavior and recommend products automatically.
+
+What is Regression? (Simple)
+
+Regression is a machine learning technique used to predict a continuous numerical value.
+
+Real-World Examples
+Predict house prices
+Predict employee salaries
+Predict stock prices
+Predict temperature
+Predict sales revenue
+
+Transformer
+=============
+A Transformer is a type of neural network architecture designed to understand relationships between words (or tokens) in a sequence. 
+It was introduced in the 2017 paper "Attention Is All You Need" and is the foundation of most modern large language models.
+
+Key facts
+Published: June 2017 (NeurIPS proceedings)
+
+Authors: Ashish Vaswani et al. (Google Brain, University of Toronto)
+
+
+Simple analogy
+
+Imagine you're reading a paragraph and trying to understand the meaning of a sentence.
+
+Instead of reading one word at a time and trying to remember everything, you can:
+
+Look at all the words in the sentence at once.
+Focus on the words that are most relevant to the current word.
+Build an understanding of the overall context.
+
+That's essentially what a Transformer does.
+
+
+What is Chain of Thought?
+==========================
+Breaking a problem into steps.
+
+What is a Weight? = Importance Score
+==================
+A weight is a number inside a neural network that tells AI how important something is.
+
+Think of it like:
+
+Weight = Importance Score
+
+Weight
+= Importance Score
+
+Parameter
+= Any Learned Value in the Model
+
+Human Example
+==============
+Suppose you want to predict whether a person will get a job.
+
+Factors:
+Experience
+Skills
+Education
+
+Not all factors have equal importance.
+
+Example:
+Experience = 80%
+Skills = 70%
+Education = 30%
+
+These importance values are similar to weights.
+
+What is a Parameter?
+========================
+A parameter is a value that the AI learns during training.
+
+Most parameters in neural networks are weights.
+
+So you can think:
+Parameters = All Learned Values
+
+Simple Analogy
+Imagine a student preparing for exams.
+
+During study:
+
+Math = Very Important
+Science = Important
+History = Less Important
+
+Why Do People Say
+===================
+"7 Billion Parameters"
+
+Example:
+
+Llama 3
+
+8 Billion Parameters
+
+means:
+
+8 Billion Learned Numbers
+
+stored inside the model.
+
+Attention:
+=============
+In AI, attention is a mechanism that allows a model to focus on the most relevant parts of its input when making a prediction.
+
+Think of it like reading a sentence:
+
+"The cat sat on the mat because it was soft."
+
+To understand what "it" refers to, you pay more attention to "the mat" than to other words. Attention lets AI models do something similar.
+
+
+What is Overfitting?
+======================
+Overfitting happens when a model memorizes training data and performs poorly on new data.
+
+What is Underfitting?
+======================
+Underfitting happens when the model is too simple and fails to learn the patterns in the data.
+
+Example
+A student studies only one page for an exam.
+
+What is Noise in AI?
+=====================
+Answer:
+"Noise is unwanted, incorrect, irrelevant, or misleading data that negatively affects model performance and prediction accuracy."
+
+How Do You Reduce Noise?
+=========================
+
+Answer:
+"We reduce noise through data cleaning, removing duplicates, correcting labels, handling missing values, selecting relevant features, and maintaining high-quality datasets."
+
 
 Formula for a Good Prompt
 ============================
@@ -34,9 +559,29 @@ Use service classes.
 Output Format:
 Return JSON responses.
 
+How does a prompt work?
+==========================
+A prompt is converted into tokens and combined with the conversation context. The AI model processes these tokens through a neural network and predicts the most likely next tokens to generate a response. Better prompts provide clearer context, which helps the model produce more accurate and relevant answers.
+
+
+
+Prompt
+   ↓
+Tokens
+   ↓
+Context
+   ↓
+Neural Network
+   ↓
+Next-Word Prediction
+   ↓
+Answer
+
+Tokens are small pieces of text processed by AI.
+
 
 When to use MYSQL and When to use VectorDB?
-
+============================================
 MySQL is used for structured data and exact queries such as customers, orders, products, and transactions. A Vector Database is used for semantic search, document retrieval, RAG applications, and similarity search. MySQL finds exact matches, while a Vector Database finds information based on meaning. In many AI applications, both are used together.
 
 Use MySQL When You Need Exact Data
@@ -57,8 +602,6 @@ Company Policies
 Knowledge Base
 FAQs
 Support Documents
-
-
 
 
 How MCP Works?
@@ -114,7 +657,6 @@ LangChain = Framework Around AI Model
 
 Why Companies Use LangChain
 ===========================
-
 Because it provides ready-made building blocks for:
 
 ✅ Chatbots
@@ -158,47 +700,23 @@ Use MySQL database.
 Types of Prompts
 
 1. Zero-Shot Prompt
-
 No examples given.
-
 Translate English to Hindi.
 
 2. One-Shot Prompt
-
 One example given.
-
 Hello → Hi
-
 Convert:
 Bye →
 
 3. Few-Shot Prompt
-
 Multiple examples given.
-
 Hello → Hi
 Thanks → Thank You
 Sorry → Apologies
 
 Convert:
 Bye →
-
-
-How does a prompt work?
-==========================
-A prompt is converted into tokens and combined with the conversation context. The AI model processes these tokens through a neural network and predicts the most likely next tokens to generate a response. Better prompts provide clearer context, which helps the model produce more accurate and relevant answers.
-
-Prompt
-   ↓
-Tokens
-   ↓
-Context
-   ↓
-Neural Network
-   ↓
-Next-Word Prediction
-   ↓
-Answer
 
 
 What is Semantic Search?
@@ -349,7 +867,7 @@ Audio
 Video
 
 
-==================
+===========================================
 ollama launch claude
 
 ollama run llama3
@@ -382,7 +900,9 @@ ML = Learning from data
 Deep Learning = Neural networks with many layers
 Interview Answer
 
-"AI is the overall field of creating intelligent systems. Machine Learning is a subset of AI where systems learn from data. Deep Learning is a subset of Machine Learning that uses neural networks to solve complex problems like image recognition, speech processing, and generative AI."
+AI (Artificial Intelligence) = Making machines act smart like humans.
+ML (Machine Learning) = A part of AI where machines learn patterns from data instead of being explicitly programmed.
+Deep Learning = A part of ML that uses many-layered neural networks to learn complex patterns automatically.
 
 
 How Chatgpt Works?
@@ -402,9 +922,6 @@ In simple words
 
 LangChain
 ============
-What is LangChain?
-
-
 "LangChain is a framework that helps connect LLMs with documents, databases, APIs, memory, and tools to build advanced AI applications such as chatbots, RAG systems, and AI agents."
 
 LangChain is a framework used to build AI applications with Large Language Models (LLMs) like:
@@ -496,7 +1013,7 @@ The AI generates an answer based on those sections.
 
 What is Vibe Coding?
 =====================
-Vibe Coding is a modern way of programming where you describe what you want in natural language, and AI generates most of the code.
+Vibe Coding is a modern way of programming where you describe what we want in natural language, and AI generates most of the code.
 
 4. What is a Neural Network?
 =============================
@@ -544,7 +1061,6 @@ Embedding = the process/result of converting data (text, image, audio) into numb
 Vector = the actual list of numbers produced by the embedding.
 
 
-
 What is a Vector Database?
 ===============================
 A vector database is a special database that stores data as vectors (lists of numbers) and finds information based on similarity or meaning.
@@ -557,7 +1073,7 @@ Weaviate
 Qdrant
 Milvus
 LanceDB
-Vald
+Valid
 
 Suppose you have a document:
 -----------------------------
@@ -654,7 +1170,7 @@ Ollama displays the response.
 
 What is Context Window?
 ===============================
-The context window is the AI's working memory—the amount of text it can read and use at once.
+the amount of text it can read and use at once.
 
 A context window is the amount of information an AI model can look at and remember at one time.
 
@@ -816,17 +1332,13 @@ Output:
 Prompt is similar to a function parameter.
 
 ---
-
 ## 7. What is Prompt Engineering?
-
-**Question:** What is Prompt Engineering?
 
 **Answer:**
 Prompt Engineering is the process of writing better instructions to get better AI responses.
 
 ### Bad Prompt
 Write code
-
 
 ### Good Prompt
 Write a Laravel 11 API for user registration using MySQL validation.
@@ -845,7 +1357,6 @@ May become:
 I
 love
 PHP
-
 
 AI reads tokens instead of full sentences.
 
@@ -973,7 +1484,7 @@ MCP acts like an API layer for AI.
 ## 15. What is Fine-Tuning?
 
 **Answer:**
-Training an existing model further using domain-specific data.
+Teaching an existing model new domain knowledge.
 
 **Example:**
 General Model:
