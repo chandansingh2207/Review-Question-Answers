@@ -1,11 +1,263 @@
-Here are the concepts explained in **simple language with easy examples**.
+Closure → Function remembers outer variables.
+Hoisting → Use declarations before they appear.
+Event Bubbling → Child event moves upward.
+Event Delegation → Parent handles child events.
+AJAX → Load data without page refresh.
+Promise → Future result of an async operation.
+Event Loop → Handles async tasks.
+Debounce → Run after user stops.
+Throttle → Limit how often a function runs.
+
+Frequently Asked 10-Year Experience Questions
+==============================================
+Closure → Function remembers outer variables even after execution.
+Hoisting → JavaScript moves declarations to the top.
+Promise → Object representing future success or failure.
+Async/Await → Simplifies Promise handling.
+Event Loop → Manages asynchronous operations.
+Debounce → Delay execution until activity stops.
+Throttle → Limit execution frequency.
+Event Delegation → Parent handles events for child elements.
+Callback Hell → Deeply nested callbacks that are hard to maintain.
+Memory Leak → Memory that is allocated but never released.
+Microtask Queue → High-priority async tasks like Promises.
+Macrotask Queue → Lower-priority tasks like setTimeout.
+Synchronous → Code executes line by line.
+Asynchronous → Code executes without blocking other operations.
+Single Threaded → One task executes at a time.
+Concurrency → Multiple tasks progress without running simultaneously.
+
+These short definitions are often enough for the first round of JavaScript/jQuery interviews.
 
 
------------
+IIFE → Function runs immediately after it is created.
+Callback → Function passed to another function and executed later.
+Async/Await → Write asynchronous code in a synchronous style.
+Fetch API → Modern way to make HTTP requests.
+Arrow Function → Shorter syntax for writing functions.
+Template Literal → Create strings using backticks and ${}.
+Destructuring → Extract values from objects or arrays easily.
+Spread Operator (...) → Copy or merge arrays and objects.
+Rest Parameter (...) → Collect multiple arguments into an array.
+Optional Chaining (?.) → Safely access nested properties.
+Ternary Operator → Short form of if-else.
+map() → Create a new array by transforming items.
+forEach() → Loop through array items.
+filter() → Return matching items from an array.
+find() → Return the first matching item.
+reduce() → Convert an array into a single value.
+setTimeout() → Run code after a delay.
+setInterval() → Run code repeatedly at intervals.
+Local Storage → Store data permanently in browser.
+Session Storage → Store data until browser tab closes.
+JSON → Standard format for data exchange.
+parseInt() → Convert string to integer.
+parseFloat() → Convert string to decimal number.
+typeof → Check the data type of a variable.
+NaN → Represents an invalid number.
+Truthy/Falsy → Values treated as true or false in conditions.
+Scope → Area where a variable is accessible.
+Global Scope → Variable available everywhere.
+Local Scope → Variable available only inside a function/block.
+let → Block-scoped variable declaration.
+const → Block-scoped variable whose reference cannot change.
+var → Function-scoped variable declaration.
+DOM → Representation of HTML as objects.
+DOM Manipulation → Change HTML elements dynamically.
+Event Listener → Waits for a user action.
+preventDefault() → Stops default browser behavior.
+stopPropagation() → Stops event bubbling.
+Event Target → Element that triggered the event.
+this Keyword → Refers to the current object/context.
+Prototype → Mechanism for sharing methods between objects.
+Class → Blueprint for creating objects.
+Constructor → Special method called when an object is created.
+Inheritance → One class acquires properties of another.
+Encapsulation → Hide internal details and expose only needed functionality.
+Polymorphism → Same method behaves differently in different classes.
+Module → Reusable piece of code in a separate file.
+Import → Bring code from another module.
+Export → Make code available to other modules.
+Memoization → Cache function results for faster execution.
+Recursion → Function calling itself.
+Shallow Copy → Copies only top-level properties.
+Deep Copy → Copies all nested properties.
+Currying → Convert a function with multiple arguments into nested functions.
+Higher Order Function → Function that accepts or returns another function.
+Pure Function → Same input always gives same output.
+Garbage Collection → Automatic memory cleanup.
+Polling → Repeatedly check server for updates.
+WebSocket → Real-time two-way communication.
+API → Interface for communication between applications.
+CORS → Controls cross-domain requests.
+Cookie → Small data stored in browser.
+JWT Token → Secure token used for authentication.
+Authentication → Verify user identity.
+Authorization → Check user permissions.
 
-These are very common JavaScript interview topics. For a 10-year PHP developer, understanding them conceptually is more important than memorizing syntax.
 
----
+🧠 JavaScript Basics
+Scope → Where a variable can be accessed
+Block Scope → Variables inside { } like let and const
+Function Scope → Variables inside a function (like var)
+Global Scope → Variables accessible everywhere
+
+
+⚙️ Functions
+Function Declaration → A named function that is hoisted
+Function Expression → Function stored in a variable
+Arrow Function → Short syntax for writing functions
+Callback → Function passed into another function
+
+🔄 Async Concepts
+Synchronous → Code runs one after another
+Asynchronous → Code runs without waiting
+Microtask → Runs immediately after current code (Promise)
+Macrotask → Runs later (setTimeout)
+
+🧩 Data Handling
+Primitive Type → Simple values like number, string, boolean
+Reference Type → Objects and arrays stored by reference
+Shallow Copy → Copies only first level of object
+Deep Copy → Copies full object including nested data
+
+🧠 Memory & Execution
+Call Stack → Keeps track of function execution
+Heap → Memory where objects are stored
+Garbage Collection → Removes unused memory automatically
+
+🔁 Arrays & Objects
+Map → Creates new array by transforming values
+Filter → Creates new array with matching values
+Reduce → Converts array into a single value
+ForEach → Loops through array (no return)
+
+🌐 DOM & jQuery
+DOM → Browser representation of HTML as objects
+jQuery → Library to simplify JavaScript tasks
+Selector → Method to find elements ($("#id"))
+DOM Manipulation → Changing HTML using JavaScript/jQuery
+
+🎯 Events
+Event → Action like click, scroll, keypress
+Event Listener → Function waiting for an event
+Event Target → Element that triggered the event
+
+🔐 JavaScript Concepts
+this keyword → Refers to the current object
+Strict Mode → Safer JavaScript mode ("use strict")
+Type Coercion → Automatic type conversion
+Falsy Values → false, 0, "", null, undefined, NaN
+
+
+What is the difference between microtask and macrotask?.
+==========================================================
+One-line memory trick
+
+Microtask = "run ASAP after current code"
+Macrotask = "run later in the next event loop turn".
+
+
+| Microtask                     | Macrotask                     |
+| ----------------------------- | ----------------------------- |
+| Higher priority               | Lower priority                |
+| Runs right after current code | Runs in next event loop cycle |
+| `Promise.then()`              | `setTimeout()`                |
+| Executed first                | Executed after all microtasks |
+
+JavaScript:
+============
+JavaScript is synchronous by default, but it supports asynchronous operations through the event loop, callbacks, Promises, and async/await. jQuery is a JavaScript library and can perform both synchronous operations (DOM manipulation) and asynchronous operations (AJAX).
+
+Hoisting
+===========
+Hoisting means  use a variable or function before it is defined in the code.
+
+Example with var:
+
+console.log(name); // undefined
+
+var name = "John";
+
+But be careful: not all variables can be used before their declaration.
+
+console.log(age); // ReferenceError
+
+let age = 25;
+
+
+
+
+
+
+
+Simple Difference Between Synchronous and Asynchronous
+========================================================
+🟢 Synchronous (Sync)
+
+Tasks run one after another. The next task waits until the current task finishes.
+
+🔵 Asynchronous (Async)
+
+A task can start, and JavaScript can continue with other work without waiting for it to finish.
+
+| Synchronous         | Asynchronous                                         |
+| ------------------- | ---------------------------------------------------- |
+| Waits for each task | Doesn't wait for long-running tasks                  |
+| Blocking            | Non-blocking                                         |
+| Executes in order   | Can continue other work                              |
+| Simple code flow    | Better for network requests, timers, file operations |
+
+
+🟢 Debouncing
+=================
+Run the function only after the user stops triggering the event for a certain time.
+
+Example:
+Search box:
+
+User types: h
+then he
+then hel
+then hell
+then hello
+
+Without debouncing → 5 API calls
+
+With debouncing (500ms) → wait until the user stops typing, then make 1 API call
+
+Memory trick:
+
+Debounce = "Wait until things become quiet."
+
+🔵 Throttling
+================
+Run the function at most once every X milliseconds.
+
+Example:
+User scrolls a page.
+
+Without throttling:
+
+Function may run hundreds of times per second.
+
+With throttling (1 second):
+
+Function runs only once every second while scrolling.
+
+Memory trick:
+
+Throttle = "Limit the speed."
+
+| Debouncing                 | Throttling              |
+| -------------------------- | ----------------------- |
+| Waits until activity stops | Runs at fixed intervals |
+| Good for search input      | Good for scroll/resize  |
+| Reduces unnecessary calls  | Limits call frequency   |
+
+
+
+----------
 
 Why do we use async/await?
 
