@@ -1,4 +1,12 @@
+1.Context window
+2.sql injection
+3.Token & tokenizaton
+4.Model parameters in ai
 
+
+
+
+=============================================
 1. How PHP works: request-response cycle
 2. Can we work only with PHP
 3. How to embedded HTML with PHP
@@ -8,6 +16,16 @@
 7. Does LLM holds any memory or database (large dataset)
 8. prompt, hallucination
 9. difference between chat Tool and google search
+
+================================
+Macrotask vs Microtask
+
+Index + B Tree in mYsql 
+
+AWS Services
+
+Dockerfile vs Docker composer yml
+
 
 =======================================================================1
 
@@ -102,14 +120,14 @@ Same as:
 
 InnoDB supports transactions, foreign keys, row-level locking, and crash recovery, making it suitable for modern applications. MyISAM is simpler and can be faster for some read-only workloads, but it does not support transactions or foreign keys and uses table-level locking. Therefore, InnoDB is generally preferred.
 
-| Feature                 | InnoDB               | MyISAM                        |
-| ----------------------- | -------------------- | ----------------------------- |
+| Feature                 | InnoDB               | MyISAM                           |
+| ----------------------- | -------------------- | ---------------------------------|
 | Transactions            | ✅ Supported          | ❌ Not supported               |
 | Rollback (Undo changes) | ✅ Yes                | ❌ No                          |
 | Foreign Keys            | ✅ Yes                | ❌ No                          |
 | Data Safety             | ✅ Better             | ❌ Lower                       |
 | Table Locking           | ❌ Row-level locking  | ✅ Table-level locking         |
-| Read Speed              | Good                 | Often faster for simple reads |
+| Read Speed              | Good                 | Often faster for simple reads    |
 | Crash Recovery          | ✅ Automatic recovery | ❌ More risk of corruption     |
 
 
@@ -344,10 +362,7 @@ AI may invent an answer because the event hasn't happened.
 ### Example
 
 Ask:
-
-
 Explain Laravel Middleware.
-
 
 ### Google
 
@@ -385,6 +400,8 @@ AI Overlapping.
 
 =====================
 
+
+
 What is AI?
 ====================
 
@@ -408,6 +425,41 @@ Predict employee salaries
 Predict stock prices
 Predict temperature
 Predict sales revenue
+
+
+How does a Prompt/ChatGpt work?
+================================
+A prompt is converted into tokens and combined with the conversation context. The AI model processes these tokens through a neural network and predicts the most likely next tokens to generate a response. Better prompts provide clearer context, which helps the model produce more accurate and relevant answers.
+
+
+Prompt
+   ↓
+Tokenization
+   ↓
+Context (prompt + chat history)
+   ↓
+Transformer Model
+   ↓
+   ┌──────────────────────────┐
+   │  Attention Mechanism     │
+   │  (focus on important words) │
+   └──────────────────────────┘
+   ↓
+Neural Network Layers
+   ↓
+Next-token prediction
+   ↓
+Repeat many times
+   ↓
+Final Answer
+
+⭐ Super simple summary:
+=========================
+Tokens = input pieces
+Attention = focus on important words
+Transformer = brain structure
+Prediction = output generation
+
 
 Transformer
 =============
@@ -437,37 +489,10 @@ What is Chain of Thought?
 ==========================
 Breaking a problem into steps.
 
-What is a Weight? = Importance Score
-==================
-A weight is a number inside a neural network that tells AI how important something is.
-
-Think of it like:
-
-Weight = Importance Score
-
-Weight
-= Importance Score
-
-Parameter
-= Any Learned Value in the Model
-
-Human Example
-==============
-Suppose you want to predict whether a person will get a job.
-
-Factors:
-Experience
-Skills
-Education
-
-Not all factors have equal importance.
-
-Example:
-Experience = 80%
-Skills = 70%
-Education = 30%
-
-These importance values are similar to weights.
+One-line memory trick:
+===========================
+Parameter = everything AI learns
+Weight = importance inside that learning
 
 What is a Parameter?
 ========================
@@ -503,8 +528,48 @@ means:
 
 stored inside the model.
 
+What is a Weight? = Importance Score
+====================================
+A weight is just a number in an AI model that tells it how strong or important a connection is.
+
+A weight is a number inside a neural network that tells AI how important something is.
+
+Think of it like:
+
+Weight = Importance Score
+
+Weight
+= Importance Score
+
+Parameter
+= Any Learned Value in the Model
+
+Human Example
+==============
+Suppose you want to predict whether a person will get a job.
+
+Factors:
+Experience
+Skills
+Education
+
+Not all factors have equal importance.
+
+Example:
+Experience = 80%
+Skills = 70%
+Education = 30%
+
+These importance values are similar to weights.
+
+
+
 Attention:
 =============
+Attention = a method for deciding which parts of input matter most for understanding or prediction.
+
+Attention means: “focus more on important words and less on unimportant ones.”
+
 In AI, attention is a mechanism that allows a model to focus on the most relevant parts of its input when making a prediction.
 
 Think of it like reading a sentence:
@@ -559,25 +624,6 @@ Use service classes.
 Output Format:
 Return JSON responses.
 
-How does a prompt work?
-==========================
-A prompt is converted into tokens and combined with the conversation context. The AI model processes these tokens through a neural network and predicts the most likely next tokens to generate a response. Better prompts provide clearer context, which helps the model produce more accurate and relevant answers.
-
-
-
-Prompt
-   ↓
-Tokens
-   ↓
-Context
-   ↓
-Neural Network
-   ↓
-Next-Word Prediction
-   ↓
-Answer
-
-Tokens are small pieces of text processed by AI.
 
 
 When to use MYSQL and When to use VectorDB?
@@ -836,7 +882,7 @@ LLM
      ▼
 Final Answer
 
-
+Rag & Mcp
 Difference Between RAG (Retrieval-Augmented Generation) & MCP 
 ==============================================================
 RAG is used to retrieve information from documents and knowledge bases, while MCP is used to connect AI with external tools, databases, and APIs to get live data or perform actions.
@@ -1013,7 +1059,7 @@ The AI generates an answer based on those sections.
 
 What is Vibe Coding?
 =====================
-Vibe Coding is a modern way of programming where you describe what we want in natural language, and AI generates most of the code.
+Vibe Coding is a modern way of programming where we describe what we want in natural language, and AI generates most of the code.
 
 4. What is a Neural Network?
 =============================
@@ -1204,7 +1250,6 @@ A model is the trained AI system that makes predictions or generates answers.
 
 What is RLHF?
 =============
-
 Answer:
 Reinforcement Learning from Human Feedback.
 
