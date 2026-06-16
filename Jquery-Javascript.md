@@ -48,9 +48,294 @@ Debounce → Run after user stops.
 
 Throttle → Limit how often a function runs.
 
+
+| Concept     | Simple Definition                      |
+| ----------- | -------------------------------------- |
+| Promise     | Future result of an async operation    |
+| Async       | Makes a function return a Promise      |
+| Await       | Waits for a Promise to complete        |
+| Async/Await | Cleaner way to handle Promises         |
+| Polling     | Repeatedly checks server for updates   |
+| AJAX        | Load data without page refresh         |
+| Fetch API   | Modern way to call APIs                |
+| Callback    | Function passed to another function    |
+| Event Loop  | Handles async tasks in JavaScript      |
+| setTimeout  | Runs code once after a delay           |
+| setInterval | Runs code repeatedly after an interval |
+
+
+JavaScript & jQuery Interview One-Liner Answers
+===============================================
+JavaScript Basics
+
+What is JavaScript?
+JavaScript is a programming language used to make web pages interactive.
+
+What is jQuery?
+jQuery is a JavaScript library that simplifies DOM manipulation, events, and AJAX.
+
+What is DOM?
+DOM (Document Object Model) is the HTML structure that JavaScript can access and modify.
+
+What is BOM?
+BOM (Browser Object Model) provides browser-related objects like window, history, and navigator.
+
+Common BOM Objects:
+
+window
+history
+location
+navigator
+screen
+
+Scope
+==========
+
+Global Scope
+Variable accessible from anywhere in the program.
+
+Function Scope
+Variable accessible only inside a function.
+
+Block Scope
+Variable accessible only inside a block {}.
+
+Functions
+============
+
+Function Declaration
+A normal named function defined using the function keyword.
+
+Function Expression
+A function stored in a variable.
+
+Arrow Function
+Shorter syntax for writing functions.
+
+Callback Function
+A function passed as an argument to another function.
+
+IIFE
+A function that runs immediately after it is defined.
+
+Core Concepts
+================
+Closure
+A function remembers variables from its outer scope.
+
+Hoisting
+JavaScript moves declarations to the top before execution.
+
+Execution Context
+The environment where JavaScript code executes.
+
+Call Stack
+A stack that tracks function execution order.
+
+Event Loop
+Handles asynchronous tasks and moves them to execution when the stack is empty.
+
+Single Threaded
+JavaScript executes one task at a time.
+
+
+Quick Interview Favorites
+===========================
+What is Closure?
+Function remembers outer variables.
+
+What is Hoisting?
+Declarations move to the top before execution.
+
+What is Promise?
+Future result of an asynchronous operation.
+
+What is Async/Await?
+Cleaner syntax for handling Promises.
+
+What is Event Loop?
+Manages asynchronous task execution.
+
+What is AJAX?
+Loads data without page refresh.
+
+What is Event Delegation?
+Parent handles child events.
+
+What is Debounce?
+Execute after user stops triggering events.
+
+What is Throttle?
+Limit function execution frequency.
+
+What is CORS?
+Cross-domain request permission mechanism.
+
+What is Prototype?
+JavaScript's inheritance mechanism.
+
+What is Polling?
+Repeatedly asking server for updates.
+
+What is Fetch API?
+Modern API for HTTP requests.
+
+What is localStorage?
+Permanent browser storage.
+
+What is sessionStorage?
+Temporary browser storage for one session.
+
+Callback
+=========
+Callback Hell in jQuery (or JavaScript in general) happens when you have many asynchronous operations nested inside one another, creating deeply indented and hard-to-read code.
+
+Example of Callback Hell
+$.get("/user", function(user) {
+    $.get("/orders/" + user.id, function(orders) {
+        $.get("/payment/" + orders[0].id, function(payment) {
+            console.log(payment);
+        });
+    });
+});
+
+The code starts looking like a pyramid:
+
+task1(function() {
+    task2(function() {
+        task3(function() {
+            task4(function() {
+                // ...
+            });
+        });
+    });
+});
+
+| Keyword | Can Reassign? | Scope          | Hoisted?                               |
+| ------- | ------------- | -------------- | -------------------------------------- |
+| `var`   | ✅ Yes         | Function scope | Yes                                    |
+| `let`   | ✅ Yes         | Block scope    | Yes (but can't use before declaration) |
+| `const` | ❌ No          | Block scope    | Yes (but can't use before declaration) |
+
+
 Frequently Asked 10-Year Experience Questions
 ==============================================
-Closure → Function remembers outer variables even after execution.
+closure:
+=========
+A closure is a function that can remember and use variables from outside itself, even after that outer function is done.
+
+Even simpler:
+
+👉 It’s a function with memory.
+
+Example idea:
+function outer() {
+  let x = 10;
+
+  function inner() {
+    console.log(x); // still remembers x
+  }
+
+  return inner;
+}
+
+Even after outer() finishes, inner() still remembers x = 10.
+
+Lexical scope means:
+====================
+👉 A function can access variables based on where it is written in the code, not where it is called.
+
+Simple Example
+function outer() {
+    let x = 10;
+
+    function inner() {
+        console.log(x); // can access x
+    }
+
+    inner();
+}
+
+outer();
+
+
+Spread Operator (...) — Simple
+=================================
+The spread operator in JavaScript (...) is used to expand (spread out) elements of an array or object.
+Spread operator = open the box and lay all chocolates out individually.
+
+1. For Arrays
+
+Copy an array
+
+let arr1 = [1, 2, 3];
+let arr2 = [...arr1];
+
+console.log(arr2); // [1, 2, 3]
+
+👉 It spreads all values from arr1 into arr2.
+
+Copy an array
+let arr1 = [1, 2, 3];
+let arr2 = [...arr1];
+
+console.log(arr2); // [1, 2, 3]
+
+Combine arrays
+let a = [1, 2];
+let b = [3, 4];
+
+let c = [...a, ...b];
+
+console.log(c); // [1, 2, 3, 4]
+
+
+
+
+1. Using fetch with async/await
+================================
+you can absolutely use async/await for API calls in JavaScript. In fact, it’s the most readable way.
+
+async function getUsers() {
+  try {
+    const response = await fetch("https://api.example.com/users");
+    const data = await response.json();
+
+    console.log(data);
+  } catch (error) {
+    console.log("Error:", error);
+  }
+}
+
+getUsers();
+
+
+Destructuring in JavaScript (Simple)
+====================================
+👉 Taking values from an array or object and putting them into variables easily.
+
+1. Array Destructuring
+let arr = [10, 20, 30];
+
+let [a, b, c] = arr;
+
+console.log(a); // 10
+console.log(b); // 20
+console.log(c); // 30
+
+
+2.Object Destructuring
+let user = {
+  name: "John",
+  age: 25
+};
+
+let { name, age } = user;
+
+console.log(name); // John
+console.log(age);  // 25
+
+
 
 Hoisting → JavaScript moves declarations to the top.
 
