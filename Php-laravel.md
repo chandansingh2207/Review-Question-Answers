@@ -1,3 +1,345 @@
+
+=============================================
+1. How PHP works: request-response cycle
+2. Can we work only with PHP
+3. How to embedded HTML with PHP
+4. Database engines, how transaction work
+5. what is microservice and macroservice queues in JS
+6. what is context, parameter
+7. Does LLM holds any memory or database (large dataset)
+8. prompt, hallucination
+9. difference between chat Tool and google search
+
+=======================================================================1
+
+Here are simple interview-friendly answers:
+
+## 1. How PHP works (Request → Response Cycle)
+
+### Flow:
+
+1. User opens a website in browser.
+2. Browser sends a request to web server (Apache/Nginx).
+3. Server finds the PHP file.
+4. PHP code executes on the server.
+5. PHP may read/write data from MySQL.
+6. PHP generates HTML.
+7. HTML is sent back to browser.
+8. Browser displays the page.
+
+### Example
+
+
+<?php
+echo "Hello World";
+?>
+
+
+Browser receives:
+
+html
+Hello World
+
+
+**Important:** PHP runs on the server, not in the browser.
+
+---
+
+## 2. Can we work only with PHP?
+
+**Yes, but with limitations.**
+
+PHP can:
+
+* Handle business logic
+* Connect to database
+* Create APIs
+* Process forms
+
+But modern websites usually need:
+
+| Technology | Purpose          |
+| ---------- | ---------------- |
+| PHP        | Backend          |
+| HTML       | Page structure   |
+| CSS        | Design           |
+| JavaScript | User interaction |
+| MySQL      | Data storage     |
+
+Example:
+
+* PHP saves customer data.
+* HTML shows form.
+* CSS styles form.
+* JavaScript validates form.
+
+---
+
+## 3. How to Embed HTML with PHP?
+
+PHP can be mixed directly with HTML.
+
+### Example
+<h1>Welcome</h1>
+<?php
+$name = "Chandan";
+?>
+<p>Hello <?php echo $name; ?></p>
+
+Output:
+Welcome
+Hello Chandan
+
+### Alternative
+<?= $name ?>
+
+Same as:
+<?php echo $name; ?>
+
+---
+## 4. Database Engines & How Transactions Work
+
+### Common MySQL Engines
+
+InnoDB supports transactions, foreign keys, row-level locking, and crash recovery, making it suitable for modern applications. MyISAM is simpler and can be faster for some read-only workloads, but it does not support transactions or foreign keys and uses table-level locking. Therefore, InnoDB is generally preferred.
+
+| Feature                 | InnoDB               | MyISAM                           |
+| ----------------------- | -------------------- | ---------------------------------|
+| Transactions            | ✅ Supported          | ❌ Not supported               |
+| Rollback (Undo changes) | ✅ Yes                | ❌ No                          |
+| Foreign Keys            | ✅ Yes                | ❌ No                          |
+| Data Safety             | ✅ Better             | ❌ Lower                       |
+| Table Locking           | ❌ Row-level locking  | ✅ Table-level locking         |
+| Read Speed              | Good                 | Often faster for simple reads    |
+| Crash Recovery          | ✅ Automatic recovery | ❌ More risk of corruption     |
+
+
+Most projects use **InnoDB**.
+
+### What is a Transaction?
+
+A transaction is a group of SQL statements that should either:
+
+* All succeed
+* Or all fail
+
+### Example: Bank Transfer
+
+sql
+START TRANSACTION;
+
+UPDATE account
+SET balance = balance - 1000
+WHERE id = 1;
+
+UPDATE account
+SET balance = balance + 1000
+WHERE id = 2;
+
+COMMIT;
+If any query fails:
+
+sql
+ROLLBACK;
+
+Money won't be lost.
+
+### Interview Definition
+
+> Transaction ensures data consistency by treating multiple SQL operations as one unit.
+
+---
+
+
+### Queue in JS/System Design
+
+Queue is used for background tasks.
+
+Example:
+
+Customer places order.
+
+Instead of:
+Order → Send Email → Generate Invoice → SMS
+User waits.
+
+Use Queue:
+Order Created
+     ↓
+ Queue
+     ↓
+ Worker processes Email/SMS later
+
+Popular:
+
+* Redis Queue
+* RabbitMQ
+* Amazon SQS
+
+---
+
+## 6. What is Context and Parameter?
+
+Context is the information that AI uses to understand your request and generate a relevant response.
+
+Parameter
+Parameters are the internal values (weights) that an AI model learns during training.
+
+Input passed to a function.
+
+javascript
+function greet(name) {
+   console.log(name);
+}
+
+
+`name` is a parameter.
+
+### Context
+
+The environment in which code runs.
+
+JavaScript example:
+
+javascript
+const user = {
+   name: "Chandan",
+   show() {
+      console.log(this.name);
+   }
+}
+
+
+Here `this` refers to current object.
+
+That current object is the context.
+
+
+---
+
+## 7. Does LLM Hold Any Memory or Database?
+
+An LLM has two different kinds of "memory"
+
+Context Window (Temporary Memory):
+----------------------------------
+Remembers the current conversation.
+Uses previous messages to answer follow-up questions.
+Once the conversation ends or the context is removed, that information is no longer available.
+
+Persistent Memory (if a system provides it):
+---------------------------------------------
+Some AI applications can save user preferences or notes separately.
+This is handled by an external memory system, not by the LLM's parameters themselves.
+
+### Short Answer
+No.
+Context Window (Temporary Memory)
+
+LLM does not work like MySQL.
+
+### During Training
+Model learns patterns from huge amounts of text.
+
+After training:
+* Knowledge is stored as weights (numbers)
+* Not as rows and tables
+
+### Example
+
+MySQL:
+
+ID | Name
+1  | Chandan
+
+LLM:
+Does not store data like this.
+It stores learned patterns.
+
+### Memory in ChatGPT
+There can be:
+
+1. Conversation Context
+2. Saved Memory (if enabled)
+3. External Database/Vector DB connected by developers
+
+---
+
+## 8. Prompt and Hallucination
+
+### Prompt
+
+Instruction given to AI.
+
+Example:
+
+
+Explain MySQL JOIN in simple terms.
+
+
+This is a prompt.
+
+### Hallucination
+
+AI generates information that sounds correct but is actually wrong.
+
+Example:
+
+
+Who won Cricket World Cup 2030?
+
+
+AI may invent an answer because the event hasn't happened.
+
+### How to Reduce Hallucination?
+
+* Give clear prompts
+* Provide context
+* Use RAG (database search)
+* Use MCP/tools
+* Verify important answers
+
+---
+
+## 9. Difference Between ChatGPT Tool and Google Search
+
+| ChatGPT              | Google Search                            |
+| -------------------- | ---------------------------------------- |
+| Gives direct answer  | Gives links                              |
+| Understands context  | Keyword search                           |
+| Can summarize        | User reads websites                      |
+| Can write code       | Cannot directly write complete solutions |
+| Can explain concepts | Finds pages containing concepts          |
+
+### Example
+
+Ask:
+Explain Laravel Middleware.
+
+### Google
+
+Returns links:
+
+* Docs
+* Blogs
+* Tutorials
+
+### ChatGPT
+
+Directly explains:
+
+> Middleware is a filter that runs before or after a request. It is used for authentication, logging, etc.
+
+### Best Practice
+
+* Use Google to find sources.
+* Use ChatGPT to understand and summarize.
+
+
+
+
+
+
 Compliance:
 =======================
 Payment Card Industry Data Security Standard (PCI DSS)
@@ -88,6 +430,8 @@ class PaymentService
     }
 }
 
+
+
 🔹 Step 2: Use Service in Controller (Dependency Injection)
 ============================================================
 
@@ -107,6 +451,8 @@ class OrderController extends Controller
     }
 }
 
+
+
 | Without Service Container          | With Service Container               |
 | ---------------------------------- | ------------------------------------ |
 | `$payment = new PaymentService();` | Laravel automatically creates object |
@@ -114,12 +460,13 @@ class OrderController extends Controller
 | Tight coupling                     | Loose coupling                       |
 
 
+
+
 Laravel is automatically giving PaymentService to the store() method.
+
 
 👉 You did NOT create it using new PaymentService()
 Laravel did it for you using the Service Container.
-
-
 
 
 
@@ -127,6 +474,8 @@ Dependency injection :
 ======================
 In Laravel, dependency injection allows us to inject dependencies (like services, classes, or objects) directly into the constructor 
 method of a class, rather than having to manually create instances of these dependencies.
+
+
 
 Step 1: Service Provider Example
 ================================
@@ -138,6 +487,8 @@ class SMSService {
         return "SMS Sent: ".$msg;
     }
 }
+
+
 
 Step 2: Inject it in Controller
 ==================================
@@ -152,8 +503,12 @@ class UserController extends Controller  //"UserController is a controller and g
 }
 
 
+
+
 ✔ Laravel automatically creates SMSService
+
 ✔ Injects it into the method
+
 ✔ No need to do $sms = new SMSService()
 
 1. Job
@@ -179,6 +534,7 @@ class SendWelcomeEmail implements ShouldQueue
 
 The actual work is written inside the handle() method.
 
+
 2. Queue
 ===============
 A Queue executes jobs asynchronously (in the background).
@@ -187,8 +543,10 @@ Without Queue:
 
 User clicks Register
 ↓
+
 Email sent
 ↓
+
 Response returned
 
 User waits until the email is sent.
@@ -197,10 +555,13 @@ With Queue:
 
 User clicks Register
 ↓
+
 Job pushed to queue
 ↓
+
 Response returned immediately
 ↓
+
 Queue worker sends email
 
 Dispatch a job:
@@ -214,9 +575,13 @@ php artisan queue:work
 Common queue drivers:
 
 Database
+
 Redis
+
 Amazon SQS
+
 Beanstalkd
+
 
 3. Scheduler
 =====================
@@ -225,7 +590,9 @@ The Task Scheduler runs tasks automatically at scheduled times.
 Instead of creating multiple cron jobs:
 
 Backup database at 1 AM
+
 Send reports at 8 AM
+
 Clear cache every hour
 
 Laravel manages them centrally.
@@ -245,15 +612,23 @@ Laravel then decides which tasks should execute.
 Interface:
 ===========
 The interface only declares methods; it does not contain the actual implementation.
+
 An interface defines what methods a class must implement, but not how those methods work.
 
 
 ⭐ Key Points
+
 Interface has only method declarations, no method body.
+
 A class can implement multiple interfaces.
+
 Used to achieve abstraction.
 
-Interfaces: PHP supports interface inheritance, where a class can implement multiple interfaces. Interfaces define contracts that classes must follow by implementing specified methods. This allows classes to inherit method signatures from multiple sources without inheriting implementation details.
+
+Interfaces: 
+PHP supports interface inheritance, where a class can implement multiple interfaces. Interfaces define contracts that classes must follow 
+by implementing specified methods. This allows classes to inherit method signatures from multiple sources without inheriting 
+implementation details.
 
 Ex: 
 ====
@@ -261,17 +636,20 @@ interface Animal {
     public function makeSound();
 }
 
+
 class Dog implements Animal {
     public function makeSound() {
         echo "Bark";
     }
 }
 
+
 class Cat implements Animal {
     public function makeSound() {
         echo "Meow";
     }
 }
+
 
 Abstract Class:
 =================
@@ -293,7 +671,9 @@ Think of a Vehicle.
 Every vehicle can start, but the way it moves differs:
 
 Car moves on roads.
+
 Boat moves on water.
+
 Airplane moves in the air.
 
 So, we create an abstract class Vehicle with a common method and an abstract method.
