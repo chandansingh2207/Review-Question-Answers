@@ -1,7 +1,19 @@
 
 LangChain: Framework for building LLM applications using prompts, tools, memory, and chains.
 
+Why Companies Use LangChain
+===========================
+Because it provides ready-made building blocks for:
+
+✅ Chatbots
+✅ RAG Systems
+✅ AI Agents
+✅ Enterprise Search
+✅ Document Q&A
+✅ Internal Company Copilots
+
 LangGraph: Framework for building AI agents.
+LangGraph is an open-source framework for building stateful AI agents and multi-agent workflows. It is developed by LangChain
 
 Token: Small unit of text processed by an LLM.
 
@@ -54,6 +66,24 @@ Advanced AI System that can plan, reason, make decisions, and autonomously execu
 | Less autonomous     | More autonomous             |
 | Tool usage          | Tool + reasoning + planning |
 
+What is a Weight? = Importance Score
+====================================
+A weight is a number inside a neural network that determines how important a piece of information is.
+
+Think of it as a score or importance value.
+
+A weight is a number inside a neural network that tells AI how important something is.
+
+Think of it like:
+
+Weight = Importance Score
+
+Weight
+= Importance Score
+
+Parameter
+= Any Learned Value in the Model
+
 
 What is a Model in AI? (Simple)
 ===============================
@@ -70,6 +100,11 @@ AI (Artificial Intelligence) is technology that enables computers to perform tas
 What is Regression? (Simple)
 ============================
 Regression is a machine learning technique used to predict a continuous numerical value.
+
+Regression vs Classification
+===============================
+Regression → Predicts a number (e.g., price, temperature, salary).
+Classification → Predicts a category (e.g., spam/not spam, cat/dog).
 
 Real-World Examples:
 
@@ -186,7 +221,9 @@ stored inside the model.
 
 What is a Weight? = Importance Score
 ====================================
-A weight is just a number in an AI model that tells it how strong or important a connection is.
+A weight is a number inside a neural network that determines how important a piece of information is.
+
+Think of it as a score or importance value.
 
 A weight is a number inside a neural network that tells AI how important something is.
 
@@ -217,7 +254,6 @@ Skills = 70%
 Education = 30%
 
 These importance values are similar to weights.
-
 
 
 Attention:
@@ -362,15 +398,10 @@ Why Companies Use LangChain
 Because it provides ready-made building blocks for:
 
 ✅ Chatbots
-
 ✅ RAG Systems
-
 ✅ AI Agents
-
 ✅ Enterprise Search
-
 ✅ Document Q&A
-
 ✅ Internal Company Copilots
 
 Formula for a Good Prompt
