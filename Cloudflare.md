@@ -1,10 +1,37 @@
+Cloudflare   → is a company that provides services to make websites and applications faster, more secure, and more reliable.
+
+NS     → Name Server , Name Server (NS) is used to tell the internet where to find the DNS records for your domain.
+
+DNS hosting – translates domain names (like example.com) into IP addresses.
+
+CDN (Content Delivery Network) – caches content around the world to speed up websites.
+
+DDoS protection – helps defend against traffic-flooding attacks.
+
+Web Application Firewall (WAF) – blocks malicious web requests.
+
+SSL/TLS – enables HTTPS encryption.
+
+Email security – supports technologies such as SPF, DKIM, and DMARC reporting.
+
+DNS   → (Domain Name System) converts a domain name into an IP address.
+
+Example:
+
+google.com
+     ↓
+142.250.193.78
 
 A      → Maps a domain to an IPv4 address., example.com → 192.168.1.10
+
 AAAA   → Maps a domain to an IPv6 address.
+
 CNAME  → CNAME = Canonical Name
+
 One domain points to another domain.
 
 MX     → MX = Mail Exchange
+
 Tells where emails should be delivered.
 
 TXT    → Stores text information.
@@ -66,6 +93,11 @@ DMARC says:
 "If an email claims to be from my domain but fails authentication, reject it, quarantine it, or just monitor it."
 
 It also sends reports to the domain owner about authentication failures.
+
+DMARC Policies
+p=none → Monitor only. Deliver the email normally and report failures.
+p=quarantine → Treat failed emails as suspicious and usually send them to Spam/Junk.
+p=reject → Reject the email completely; it is not delivered to the recipient.
 
 ===========================================================
 # DNS Interview Questions and Answers (Simple)
