@@ -1,8 +1,40 @@
+Jquery,javascript is Synchronous perform one task at a time.
+
+Synchronous (Sync): Code executes one task at a time, in order. The next line waits until the current line finishes.
+
+
+Asynchronous (Async): A task that takes time (like fetching data from a server) can start, and the program can continue doing other work instead of waiting for it to finish.
+
+Hoisting → Hoisting means use a variable or function before it is defined in the code.
+
+
+Microtask Queue → High-priority async tasks like Promises.
+
+Macrotask Queue → Lower-priority tasks like setTimeout.
+
 Closure → Function remembers outer variables.
 
-Hoisting → Use declarations before they appear.
 
-Event Bubbling → Child event moves upward.
+Event Bubbling is the process where an event starts from the target element and then propagates upward through its parent elements.
+
+Ex:
+<div id="parent">
+  <button id="child">Click Me</button>
+</div>
+
+document.getElementById("child").addEventListener("click", () => {
+  console.log("Button clicked");
+});
+
+document.getElementById("parent").addEventListener("click", () => {
+  console.log("Div clicked");
+});
+
+When you click the button, the output is:
+
+Button clicked
+
+Div clicked
 
 Event Delegation → Parent handles child events.
 
@@ -198,8 +230,8 @@ Callback → Function passed into another function
 🔄 Async Concepts
 Synchronous → Code runs one after another
 Asynchronous → Code runs without waiting
-Microtask → Runs immediately after current code (Promise)
-Macrotask → Runs later (setTimeout)
+Microtask → High Priority task, Runs immediately after current code (Promise)
+Macrotask → Low priority tasks, Runs later (setTimeout)
 
 🧩 Data Handling
 Primitive Type → Simple values like number, string, boolean
@@ -240,7 +272,7 @@ What is the difference between microtask and macrotask?.
 ==========================================================
 One-line memory trick
 
-Microtask = "run ASAP after current code"
+Microtask = "run ASAP after current code".
 Macrotask = "run later in the next event loop turn".
 
 
@@ -253,7 +285,9 @@ Macrotask = "run later in the next event loop turn".
 
 JavaScript:
 ============
-JavaScript is synchronous by default, but it supports asynchronous operations through the event loop, callbacks, Promises, and async/await. jQuery is a JavaScript library and can perform both synchronous operations (DOM manipulation) and asynchronous operations (AJAX).
+JavaScript is synchronous by default, but it supports asynchronous operations through the event loop, callbacks, Promises, and async/await. 
+
+jQuery is a JavaScript library and can perform both synchronous operations (DOM manipulation) and asynchronous operations (AJAX).
 
 Hoisting
 ===========
@@ -341,11 +375,41 @@ Throttle = "Limit the speed."
 | Good for search input      | Good for scroll/resize  |
 | Reduces unnecessary calls  | Limits call frequency   |
 
+🟢 Fastest Selector
 
+ID selector (#id) is the fastest
+
+Example:
+$("#header")
+
+Why fast?
+ID is unique
+Browser can directly find it (no searching needed)
+
+🔵 Slower selectors
+1. Class selector
+$(".menu")
+
+Slower than ID
+Can match multiple elements
+
+
+⚡ Speed order (fast → slow)
+ID (#id)
+  ↓
+Class (.class)
+  ↓
+Tag (div, p)
+  ↓
+Nested/complex selectors
 
 ----------
 
 Why do we use async/await?
+
+Simple Definition
+async → Makes a function asynchronous and returns a Promise.
+await → Waits for a Promise to finish before moving to the next line.
 
 Async/await is used to handle asynchronous operations such as API calls, file uploads, and database requests in a cleaner and more readable way. It is built on top of Promises and helps avoid complex .then() chains while making asynchronous code look like synchronous code.
 
@@ -371,7 +435,7 @@ Think of ordering food online:
 
 ### Example
 
-```javascript
+
 const myPromise = new Promise((resolve, reject) => {
 
     let success = true;
@@ -387,21 +451,21 @@ const myPromise = new Promise((resolve, reject) => {
 myPromise
 .then(result => console.log(result))
 .catch(error => console.log(error));
-```
+
 
 ### Output
 
-```text
+text
 Payment Successful
-```
+
 
 ### States
 
-```text
+text
 Pending
 Resolved (Success)
 Rejected (Failed)
-```
+
 
 ---
 
@@ -411,25 +475,25 @@ Rejected (Failed)
 
 ### Example
 
-```javascript
+
 async function greet() {
     return "Hello";
 }
 
 greet().then(data => console.log(data));
-```
+
 
 ### Output
 
-```text
+text
 Hello
-```
+
 
 ### Simple Definition
 
-```text
+text
 async = This function can handle asynchronous work.
-```
+
 
 ---
 
@@ -441,7 +505,7 @@ It can only be used inside an `async` function.
 
 ### Example
 
-```javascript
+
 function getData() {
 
     return new Promise(resolve => {
@@ -463,36 +527,36 @@ async function showData() {
 }
 
 showData();
-```
+
 
 ### Output (after 2 seconds)
 
-```text
+text
 User Data
-```
+
 
 ### Simple Definition
 
-```text
+text
 await = Wait here until Promise finishes.
-```
+
 
 ---
 
 # 4. Promise vs Async/Await
 
 ### Promise Style
+A Promise represents a value that may be available now, later, or never.
 
-```javascript
 fetch('/api/user')
 .then(response => response.json())
 .then(data => console.log(data))
 .catch(error => console.log(error));
-```
+
 
 ### Async/Await Style
+async/await is just a cleaner way to work with Promises.
 
-```javascript
 async function getUser() {
 
     try {
@@ -510,13 +574,13 @@ async function getUser() {
     }
 
 }
-```
+
 
 ### Interview Answer
 
-```text
+text
 Async/Await is just a cleaner way to write Promise-based code.
-```
+
 
 ---
 
@@ -526,38 +590,38 @@ Used to call APIs and get data from a server.
 
 ### Example
 
-```javascript
+
 fetch('/api/user')
 .then(response => response.json())
 .then(data => console.log(data));
-```
+
 
 ### Example Response
 
-```json
+json
 {
     "name":"Chandan",
     "age":30
 }
-```
+
 
 ### Output
 
-```text
+text
 Chandan
-```
+
 
 ### Simple Definition
 
-```text
+text
 Fetch is a modern way to make HTTP requests.
-```
+
 
 ---
 
 # Fetch Using Async/Await
 
-```javascript
+
 async function getUser() {
 
     const response = await fetch('/api/user');
@@ -569,7 +633,7 @@ async function getUser() {
 }
 
 getUser();
-```
+
 
 ---
 
@@ -579,37 +643,37 @@ getUser();
 
 ### Example
 
-```javascript
+
 let prices = [100, 200, 300];
 
 let discounted = prices.map(price => price - 10);
 
 console.log(discounted);
-```
+
 
 ### Output
 
-```text
+text
 [90, 190, 290]
-```
+
 
 ### Original Array
 
-```javascript
+
 [100,200,300]
-```
+
 
 ### New Array
 
-```javascript
+
 [90,190,290]
-```
+
 
 ### Simple Definition
 
-```text
+text
 map() = Take every item, modify it, return a new array.
-```
+
 
 ---
 
@@ -617,27 +681,27 @@ map() = Take every item, modify it, return a new array.
 
 ### API Response
 
-```javascript
+
 const users = [
     {name:'John'},
     {name:'Mike'},
     {name:'David'}
 ];
-```
+
 
 ### Extract Names
 
-```javascript
+
 const names = users.map(user => user.name);
 
 console.log(names);
-```
+
 
 ### Output
 
-```text
+text
 ["John","Mike","David"]
-```
+
 
 ---
 
@@ -647,15 +711,15 @@ console.log(names);
 
 Returns new array.
 
-```javascript
+
 let result = [1,2,3].map(x => x * 2);
-```
+
 
 Output
 
-```javascript
+
 [2,4,6]
-```
+
 
 ---
 
@@ -663,19 +727,19 @@ Output
 
 Returns nothing.
 
-```javascript
+
 [1,2,3].forEach(x => {
     console.log(x);
 });
-```
+
 
 Output
 
-```text
+text
 1
 2
 3
-```
+
 
 ---
 
@@ -683,28 +747,28 @@ Output
 
 ### Before AJAX
 
-```text
+text
 Submit Form
 Page Refresh
 Server Response
-```
+
 
 ---
 
 ### AJAX / Fetch
 
-```text
+text
 Submit Form
 No Refresh
 Background Request
 Update Page
-```
+
 
 ---
 
 ### Example Login Flow
 
-```javascript
+
 async function login() {
 
     const response = await fetch('/login.php', {
@@ -716,18 +780,18 @@ async function login() {
     console.log(result);
 
 }
-```
+
 
 ### What Happens?
 
-```text
+text
 1. fetch() sends request
 2. Server processes login
 3. Promise returned
 4. await waits
 5. Result received
 6. UI updated
-```
+
 
 ---
 
@@ -735,46 +799,46 @@ async function login() {
 
 ### Promise
 
-```text
+text
 An object representing a future result of an asynchronous operation.
-```
+
 
 ### Async
 
-```text
+text
 Marks a function as asynchronous and automatically returns a Promise.
-```
+
 
 ### Await
 
-```text
+text
 Pauses execution until a Promise is resolved or rejected.
-```
+
 
 ### Fetch
 
-```text
+text
 A modern JavaScript API used to make HTTP requests.
-```
+
 
 ### map()
 
-```text
+text
 Creates a new array by transforming each element of an existing array.
-```
+
 
 ### Common Interview Chain
 
-```text
+text
 fetch() → returns Promise
 async → allows await usage
 await → waits for Promise
 map() → transforms API data
-```
+
 
 A practical example:
 
-```javascript
+
 async function loadUsers() {
 
     const response = await fetch('/users.php');
@@ -786,7 +850,7 @@ async function loadUsers() {
     console.log(names);
 
 }
-```
+
 
 This single example demonstrates **fetch + Promise + async + await + map**, which interviewers often ask together.
 
@@ -804,17 +868,17 @@ A function that runs immediately after it is created.
 
 ### Example
 
-```javascript
+
 (function() {
     console.log("Hello");
 })();
-```
+
 
 ### Output
 
-```
+
 Hello
-```
+
 
 ### Use Case
 
@@ -829,19 +893,19 @@ Shorter way to write functions.
 
 ### Example
 
-```javascript
+
 const greet = () => {
     console.log("Hello");
 };
 
 greet();
-```
+
 
 ### Output
 
-```
+
 Hello
-```
+
 
 ### Use Case
 
@@ -856,17 +920,17 @@ Used to insert variables inside strings.
 
 ### Example
 
-```javascript
+
 let name = "Chandan";
 
 console.log(`Hello ${name}`);
-```
+
 
 ### Output
 
-```
+
 Hello Chandan
-```
+
 
 ### Use Case
 
@@ -881,7 +945,7 @@ Extract values from objects or arrays easily.
 
 ### Example
 
-```javascript
+
 const user = {
     name: "Chandan",
     age: 30
@@ -890,13 +954,13 @@ const user = {
 const { name, age } = user;
 
 console.log(name);
-```
+
 
 ### Output
 
-```
+
 Chandan
-```
+
 
 ### Use Case
 
@@ -911,17 +975,17 @@ Prevents errors if a property doesn't exist.
 
 ### Example
 
-```javascript
+
 const user = {};
 
 console.log(user.address?.city);
-```
+
 
 ### Output
 
-```
+
 undefined
-```
+
 
 Without `?.`, JavaScript throws an error.
 
@@ -938,19 +1002,19 @@ Short form of if-else.
 
 ### Example
 
-```javascript
+
 let age = 20;
 
 let result = age >= 18 ? "Adult" : "Minor";
 
 console.log(result);
-```
+
 
 ### Output
 
-```
+
 Adult
-```
+
 
 ### Use Case
 
@@ -964,19 +1028,19 @@ Creates a new array by modifying each element.
 
 ### Example
 
-```javascript
+
 let nums = [1,2,3];
 
 let doubled = nums.map(num => num * 2);
 
 console.log(doubled);
-```
+
 
 ### Output
 
-```
+
 [2,4,6]
-```
+
 
 ### Use Case
 
@@ -990,21 +1054,21 @@ Loops through an array.
 
 ### Example
 
-```javascript
+
 let nums = [1,2,3];
 
 nums.forEach(num => {
     console.log(num);
 });
-```
+
 
 ### Output
 
-```
+
 1
 2
 3
-```
+
 
 ### Use Case
 
@@ -1013,10 +1077,10 @@ nums.forEach(num => {
 
 ### Difference
 
-```javascript
+
 map()      => Returns new array
 forEach()  => Returns nothing
-```
+
 
 ---
 
@@ -1026,11 +1090,11 @@ Handle events for dynamic elements.
 
 ### Example
 
-```javascript
+
 $(document).on("click", ".btn", function() {
     alert("Clicked");
 });
-```
+
 
 ### Use Case
 
@@ -1046,21 +1110,21 @@ Changing webpage content dynamically.
 
 ### Example
 
-```javascript
+
 $("#title").text("New Title");
-```
+
 
 ### Before
 
-```html
+html
 <h1 id="title">Old Title</h1>
-```
+
 
 ### After
 
-```html
+html
 <h1 id="title">New Title</h1>
-```
+
 
 ### Use Case
 
@@ -1074,14 +1138,14 @@ Handle asynchronous operations cleanly.
 
 ### Example
 
-```javascript
+
 async function getData() {
     let response = await fetch('/api/user');
     let data = await response.json();
 
     console.log(data);
 }
-```
+
 
 ### Use Case
 
@@ -1096,11 +1160,11 @@ Modern way to call APIs.
 
 ### Example
 
-```javascript
+
 fetch('/api/user')
     .then(response => response.json())
     .then(data => console.log(data));
-```
+
 
 ### Use Case
 
@@ -1114,7 +1178,7 @@ Send request without page refresh.
 
 ### Example
 
-```javascript
+
 $.ajax({
     url: "user.php",
     type: "POST",
@@ -1123,7 +1187,7 @@ $.ajax({
         console.log(response);
     }
 });
-```
+
 
 ### Use Case
 
@@ -1139,15 +1203,15 @@ Send files/images through AJAX.
 
 ### Example
 
-```javascript
+
 let formData = new FormData();
 
 formData.append("image", file);
-```
+
 
 ### AJAX Upload
 
-```javascript
+
 $.ajax({
     url: "upload.php",
     type: "POST",
@@ -1155,7 +1219,7 @@ $.ajax({
     processData: false,
     contentType: false
 });
-```
+
 
 ### Use Case
 
@@ -1170,15 +1234,15 @@ Store data in browser permanently.
 
 ### Save
 
-```javascript
+
 localStorage.setItem("name", "Chandan");
-```
+
 
 ### Read
 
-```javascript
+
 let name = localStorage.getItem("name");
-```
+
 
 ### Use Case
 
@@ -1193,9 +1257,9 @@ Store small data in browser.
 
 ### Create
 
-```javascript
+
 document.cookie = "username=Chandan";
-```
+
 
 ### Use Case
 
@@ -1210,19 +1274,19 @@ Runs repeatedly after a fixed time.
 
 ### Example
 
-```javascript
+
 setInterval(() => {
     console.log("Running");
 }, 1000);
-```
+
 
 ### Output
 
 Every second:
 
-```
+
 Running
-```
+
 
 ### Use Case
 
@@ -1237,7 +1301,7 @@ Repeatedly checking server status.
 
 ### Example
 
-```javascript
+
 setInterval(() => {
 
     $.get("status.php", function(data){
@@ -1245,7 +1309,7 @@ setInterval(() => {
     });
 
 }, 5000);
-```
+
 
 ### Use Case
 
@@ -1261,7 +1325,7 @@ Create HTML using JavaScript.
 
 ### Example
 
-```javascript
+
 let html = `
 <div>
    <h2>Product</h2>
@@ -1269,7 +1333,7 @@ let html = `
 `;
 
 $("#container").append(html);
-```
+
 
 ### Use Case
 
@@ -1284,21 +1348,21 @@ Select HTML elements.
 
 ### Examples
 
-```javascript
+
 $("#id")
-```
+
 
 Select by ID
 
-```javascript
+
 $(".class")
-```
+
 
 Select by class
 
-```javascript
+
 $("p")
-```
+
 
 Select all paragraphs
 
@@ -1310,15 +1374,15 @@ Find nearest parent element.
 
 ### HTML
 
-```html
+html
 <div class="card">
     <button class="btn">Buy</button>
 </div>
-```
+
 
 ### jQuery
 
-```javascript
+
 $(".btn").click(function() {
 
     let card = $(this).closest(".card");
@@ -1326,7 +1390,7 @@ $(".btn").click(function() {
     console.log(card);
 
 });
-```
+
 
 ### Use Case
 
@@ -1342,20 +1406,20 @@ Store custom data in HTML.
 
 ### HTML
 
-```html
+html
 <button
     data-id="101"
     data-price="999">
     Buy
 </button>
-```
+
 
 ### jQuery
 
-```javascript
+
 let id = $(this).data("id");
 let price = $(this).data("price");
-```
+
 
 ### Use Case
 
@@ -1371,24 +1435,24 @@ Data format used between frontend and backend.
 
 ### Example
 
-```javascript
+
 {
    "name":"Chandan",
    "age":30
 }
-```
+
 
 ### Convert Object to JSON
 
-```javascript
+
 JSON.stringify(user);
-```
+
 
 ### Convert JSON to Object
 
-```javascript
+
 JSON.parse(jsonData);
-```
+
 
 ### Use Case
 
@@ -1408,22 +1472,22 @@ For a **10-year PHP/jQuery developer**, interviewers usually don't ask only synt
 * Executes when HTML DOM is loaded.
 * Doesn't wait for images.
 
-```javascript
+
 $(document).ready(function () {
     console.log("DOM Ready");
 });
-```
+
 
 `window.onload`
 
 * Waits for complete page loading.
 * Includes images, CSS, videos.
 
-```javascript
+
 window.onload = function () {
     console.log("Page Loaded");
 };
-```
+
 
 ---
 
@@ -1433,11 +1497,11 @@ window.onload = function () {
 
 Instead of attaching events to every element, attach to parent.
 
-```javascript
+
 $(document).on("click", ".btn", function () {
     alert("Clicked");
 });
-```
+
 
 ### Why?
 
@@ -1452,38 +1516,38 @@ Works for dynamically added elements.
 `.attr()`
 Gets original HTML attribute.
 
-```html
+html
 <input type="checkbox" checked>
-```
 
-```javascript
+
+
 $('input').attr('checked');
-```
+
 
 Returns:
 
-```text
+text
 checked
-```
+
 
 `.prop()`
 Gets current state.
 
-```javascript
+
 $('input').prop('checked');
-```
+
 
 Returns:
 
-```text
+text
 true
-```
+
 
 ### Use
 
-```javascript
+
 $('#checkbox').prop('checked', true);
-```
+
 
 ---
 
@@ -1491,33 +1555,33 @@ $('#checkbox').prop('checked', true);
 
 ### Answer
 
-```javascript
+
 $('#msg').html('<b>Hello</b>');
-```
+
 
 Output:
 
-```html
+html
 Hello (bold)
-```
+
 
 ---
 
-```javascript
+
 $('#msg').text('<b>Hello</b>');
-```
+
 
 Output:
 
-```text
+text
 <b>Hello</b>
-```
+
 
 ---
 
-```javascript
+
 $('#name').val();
-```
+
 
 Gets input value.
 
@@ -1529,17 +1593,17 @@ Gets input value.
 
 Adds at end.
 
-```javascript
+
 $('#list').append('<li>New</li>');
-```
+
 
 ### prepend()
 
 Adds at beginning.
 
-```javascript
+
 $('#list').prepend('<li>New</li>');
-```
+
 
 ---
 
@@ -1549,12 +1613,12 @@ $('#list').prepend('<li>New</li>');
 
 Multiple methods in one statement.
 
-```javascript
+
 $('#box')
 .addClass('active')
 .show()
 .css('color', 'red');
-```
+
 
 ### Benefit
 
@@ -1566,27 +1630,27 @@ Cleaner code.
 
 ### HTML
 
-```html
+html
 <div class="card">
     <button class="btn">Buy</button>
 </div>
-```
+
 
 ### find()
 
 Search child elements.
 
-```javascript
+
 $('.card').find('.btn');
-```
+
 
 ### closest()
 
 Search parent elements.
 
-```javascript
+
 $('.btn').closest('.card');
-```
+
 
 ---
 
@@ -1596,13 +1660,13 @@ $('.btn').closest('.card');
 
 Current element that triggered event.
 
-```javascript
+
 $('.btn').click(function () {
 
     $(this).hide();
 
 });
-```
+
 
 Only clicked button hides.
 
@@ -1612,9 +1676,9 @@ Only clicked button hides.
 
 ### hide()
 
-```javascript
+
 $('#box').hide();
-```
+
 
 Element exists but hidden.
 
@@ -1622,9 +1686,9 @@ Element exists but hidden.
 
 ### remove()
 
-```javascript
+
 $('#box').remove();
-```
+
 
 Element completely deleted.
 
@@ -1638,7 +1702,7 @@ Asynchronous JavaScript And XML.
 
 Allows server communication without page refresh.
 
-```javascript
+
 $.ajax({
     url: 'save.php',
     type: 'POST',
@@ -1646,7 +1710,7 @@ $.ajax({
         console.log(response);
     }
 });
-```
+
 
 ---
 
@@ -1654,9 +1718,9 @@ $.ajax({
 
 ### GET
 
-```javascript
+
 $.get('user.php?id=1');
-```
+
 
 * Data in URL
 * Limited length
@@ -1666,9 +1730,9 @@ $.get('user.php?id=1');
 
 ### POST
 
-```javascript
+
 $.post('user.php',{id:1});
-```
+
 
 * Data in request body
 * Better for forms
@@ -1681,13 +1745,13 @@ $.post('user.php',{id:1});
 
 Use FormData.
 
-```javascript
+
 let fd = new FormData();
 
 fd.append('image', file);
-```
 
-```javascript
+
+
 $.ajax({
     url:'upload.php',
     type:'POST',
@@ -1695,7 +1759,7 @@ $.ajax({
     processData:false,
     contentType:false
 });
-```
+
 
 ---
 
@@ -1721,9 +1785,9 @@ Allows browser to set multipart/form-data automatically.
 
 ### empty()
 
-```javascript
+
 $('#box').empty();
-```
+
 
 Removes child content.
 
@@ -1731,9 +1795,9 @@ Removes child content.
 
 ### remove()
 
-```javascript
+
 $('#box').remove();
-```
+
 
 Removes entire element.
 
@@ -1741,13 +1805,13 @@ Removes entire element.
 
 # 16. How to prevent form submission?
 
-```javascript
+
 $('#form').submit(function(e){
 
     e.preventDefault();
 
 });
-```
+
 
 ### Use
 
@@ -1761,7 +1825,7 @@ AJAX form submission.
 
 Delay execution until user stops typing.
 
-```javascript
+
 let timer;
 
 $('#search').keyup(function(){
@@ -1775,7 +1839,7 @@ $('#search').keyup(function(){
     },500);
 
 });
-```
+
 
 ### Use
 
@@ -1802,19 +1866,19 @@ Run once every second.
 
 ### HTML
 
-```html
+html
 <button
 data-id="10"
 data-price="999">
 Buy
 </button>
-```
+
 
 ### jQuery
 
-```javascript
+
 let id = $(this).data('id');
-```
+
 
 ---
 
@@ -1822,9 +1886,9 @@ let id = $(this).data('id');
 
 ### LocalStorage
 
-```javascript
+
 localStorage.setItem('name','John');
-```
+
 
 Persists after browser close.
 
@@ -1832,9 +1896,9 @@ Persists after browser close.
 
 ### SessionStorage
 
-```javascript
+
 sessionStorage.setItem('name','John');
-```
+
 
 Removed when tab closes.
 
@@ -1851,25 +1915,25 @@ Removed when tab closes.
 
 # 22. How do you check if an element exists?
 
-```javascript
+
 if($('.box').length){
     console.log('Found');
 }
-```
+
 
 ---
 
 # 23. How to disable a button?
 
-```javascript
+
 $('#btn').prop('disabled', true);
-```
+
 
 Enable:
 
-```javascript
+
 $('#btn').prop('disabled', false);
-```
+
 
 ---
 
@@ -1879,13 +1943,13 @@ $('#btn').prop('disabled', false);
 
 Repeatedly checking server.
 
-```javascript
+
 setInterval(function(){
 
     $.get('status.php');
 
 },5000);
-```
+
 
 ### Use
 
@@ -1906,17 +1970,17 @@ setInterval(function(){
 
 ### Optimization
 
-```javascript
+
 let button = $('#btn');
-```
+
 
 Instead of
 
-```javascript
+
 $('#btn').hide();
 $('#btn').show();
 $('#btn').text('Save');
-```
+
 
 Use cached selector.
 
