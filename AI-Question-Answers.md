@@ -1,17 +1,37 @@
 
-
-#########################################################################################################
-
 LangChain: Framework for building LLM applications using prompts, tools, memory, and chains.
 
 LangGraph: Framework for building AI agents.
 
 Token: Small unit of text processed by an LLM.
 
-Parameter: Learned weight inside an AI model that stores knowledge.
+Parameter:  what ai learn during training is parameter.
+
+Learned weight inside an AI model that stores knowledge.
+
+Simple Understanding
+=======================
+During training, the AI sees billions of examples:
+
+"The sky is blue."
+"Dogs are animals."
+"PHP is a programming language."
+
+The AI does not memorize sentences like a database. Instead, it adjusts its internal numbers called parameters (weights).
+
+Each time it makes a mistake during training:
+
+Prediction → Wrong
+      ↓
+Adjust Parameters
+      ↓
+Try Again
+
+After trillions of adjustments, the parameters contain learned patterns about language, coding, reasoning, facts, etc.
 
 Token and Parameters ?
 ========================
+
 | Token              | Parameter                            |
 | ------------------ | ------------------------------------ |
 | Input text         | AI knowledge                         |
