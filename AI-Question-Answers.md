@@ -167,37 +167,6 @@ Money won't be lost.
 
 ---
 
-## 5. What are Microservices, Monolith (Macro Service), and Queues?
-
-### Monolith (Macro Service)
-
-Everything is inside one application.
-
-Example:
-
-
-E-commerce App
- ├── Login
- ├── Products
- ├── Orders
- └── Payments
-
-
-Single codebase.
-
-### Microservices
-
-Microservices is a software architecture where a large application is divided into many small, independent services, and each service performs a specific business function.
-
-User Service
-Product Service
-Order Service
-Payment Service
-
-Advantages:
-* Independent deployment
-* Easy scaling
-* Better maintainability
 
 ### Queue in JS/System Design
 
@@ -400,26 +369,59 @@ AI Overlapping.
 
 =====================
 
+#########################################################################################################
 
+LangChain: Framework for building LLM applications using prompts, tools, memory, and chains.
+
+LangGraph: Framework for building AI agents.
+
+Token: Small unit of text processed by an LLM.
+
+Parameter: Learned weight inside an AI model that stores knowledge.
+
+Token and Parameters ?
+========================
+| Token              | Parameter                            |
+| ------------------ | ------------------------------------ |
+| Input text         | AI knowledge                         |
+| Comes from user    | Stored inside model                  |
+| Counted per prompt | Counted in model size                |
+| Example: "Hello"   | Example: billions of learned weights |
+
+
+
+AI Agent: 
+An AI Agent is a system that performs a specific task using AI.
+
+Agentic AI: 
+Advanced AI System that can plan, reason, make decisions, and autonomously execute multi-step tasks toward a goal.
+
+| AI Agent            | Agentic AI                  |
+| ------------------- | --------------------------- |
+| Executes tasks      | Plans and executes tasks    |
+| Usually single task | Multi-step tasks            |
+| Less autonomous     | More autonomous             |
+| Tool usage          | Tool + reasoning + planning |
+
+
+What is a Model in AI? (Simple)
+===============================
+A Model is the AI brain that has been trained on a large amount of data to understand and generate text, images, code, etc.
 
 What is AI?
-====================
-
-**Interview Question:** What is AI?
-
-**Simple Answer:**
+===========
 AI (Artificial Intelligence) is technology that enables computers to perform tasks that normally require human intelligence, such as understanding language, recognizing images, making decisions, and answering questions.
 
 **Example:**
-
 * PHP application calculates tax using fixed rules.
 * AI application can analyze customer behavior and recommend products automatically.
 
 What is Regression? (Simple)
-
+============================
 Regression is a machine learning technique used to predict a continuous numerical value.
 
-Real-World Examples
+Real-World Examples:
+
 Predict house prices
 Predict employee salaries
 Predict stock prices
@@ -429,7 +431,7 @@ Predict sales revenue
 
 How does a Prompt/ChatGpt work?
 ================================
-A prompt is converted into tokens and combined with the conversation context. The AI model processes these tokens through a neural network and predicts the most likely next tokens to generate a response. Better prompts provide clearer context, which helps the model produce more accurate and relevant answers.
+A prompt is the instruction given to an AI. The AI converts the prompt into tokens, uses the conversation context and its trained model, then predicts the most likely next words to generate a response. Better prompts provide clearer context and usually produce better answers.
 
 
 Prompt
