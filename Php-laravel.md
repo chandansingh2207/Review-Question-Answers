@@ -43,7 +43,9 @@ Proxy → Controls access to another object.
 
 Common Design Patterns in PHP
 ==============================
+
 1. Singleton Pattern
+
 =====================
 Only one instance of a class is created.
 
@@ -61,8 +63,11 @@ class Database
         return self::$instance;
     }
 }
+
 2. Factory Pattern
+
 ========================
+
 Creates objects without exposing creation logic.
 
 class CarFactory
@@ -74,13 +79,18 @@ class CarFactory
         }
     }
 }
+
 3. Observer Pattern
+
 =======================
+
 One object notifies others when something happens.
 
 Example: user registration → send email
 
 4. Strategy Pattern
+
+====================
 
 Choose different algorithms at runtime.
 
@@ -92,15 +102,12 @@ Separates database logic from business logic.
 
 ======================================================================
 
-
-
-
-
-
 For interviews, focus on understanding the **purpose** of each pattern rather than memorizing code.
 
 # 1. Singleton Pattern
+
 =======================
+
 ### Definition
 
 Ensures only **one object** of a class is created and provides a global access point.
@@ -124,7 +131,9 @@ $db = Database::getInstance();
 ---
 
 # 2. Factory Pattern
+
 =====================
+
 ### Definition
 
 Creates objects without exposing the object creation logic to the client.
@@ -148,7 +157,9 @@ $payment = PaymentFactory::create('paypal');
 ---
 
 # 3. Strategy Pattern
+
 ======================
+
 ### Definition
 
 Allows selecting an algorithm or behavior at runtime.
@@ -178,7 +189,9 @@ $payment = new PaypalPayment();
 ---
 
 # 4. Observer Pattern
+
 =======================
+
 ### Definition
 
 When one object changes, all dependent objects get notified automatically.
@@ -203,7 +216,9 @@ $user->notify();
 ---
 
 # 5. Repository Pattern
+
 =========================
+
 ### Definition
 
 Acts as a layer between business logic and database.
@@ -228,7 +243,9 @@ $userRepository->find(1);
 ---
 
 # 6. Dependency Injection (DI)
+
 ===============================
+
 ### Definition
 
 Instead of creating dependencies inside a class, pass them from outside.
@@ -422,7 +439,9 @@ D → Dependency Inversion
 
 
 S — Single Responsibility Principle (SRP)
+
 ===========================================
+
 A class should have only one reason to change
 
 ❌ Bad:
@@ -467,7 +486,9 @@ class EmailService
 
 
 O — Open/Closed Principle (OCP)
+
 ================================
+
 Software entities should be open for extension but closed for modification.
 
 ❌ Bad:
@@ -521,7 +542,9 @@ class PaymentProcessor
 To add a new payment method, create a new class implementing the interface.
 
 L — Liskov Substitution Principle (LSP)
+
 ========================================
+
 Subtypes must be replaceable for their base types without breaking behavior.
 
 ❌ Bad:
@@ -570,7 +593,9 @@ Now substitution works correctly.
 
 
 I — Interface Segregation Principle (ISP)
+
 ============================================
+
 A child class should behave like its parent class without breaking existing code.
 
 
@@ -634,7 +659,9 @@ Each class implements only what it needs.
 
 
 D — Dependency Inversion Principle (DIP)
+
 =========================================
+
 High-level modules should depend on abstractions, not concrete implementations.
 
 ❌ Bad:
@@ -723,6 +750,7 @@ Laravel Design Patters:
 ===================================
 
 Laravel Related Question Answers
+
 ==================================
 
 Facades :
