@@ -30,15 +30,18 @@ Facade → Provides a simple interface to a complex system.
 Flyweight → Shares objects to save memory.
 Proxy → Controls access to another object.
 
-🔵 Structural Patterns (Class/structure organization)
-=======================================================
-Adapter → Converts one interface into another.
-Bridge → Separates abstraction from implementation.
-Composite → Treats individual and group objects the same.
-Decorator → Adds extra features to an object dynamically.
-Facade → Provides a simple interface to a complex system.
-Flyweight → Shares objects to save memory.
-Proxy → Controls access to another object.
+🟡 Behavioral Patterns (Object communication)
+================================================
+Observer → Notifies multiple objects when one changes.
+Strategy → Selects an algorithm at runtime.
+Command → Encapsulates a request as an object.
+Chain of Responsibility → Passes request through a chain of handlers.
+State → Changes behavior when internal state changes.
+Template Method → Defines structure, lets subclasses fill steps.
+Iterator → Accesses elements of a collection one by one.
+Mediator → Central object controls communication between objects.
+Memento → Saves and restores object state.
+Visitor → Adds new operations without changing objects.
 
 
 Common Design Patterns in PHP
@@ -745,6 +748,613 @@ Laravel Design Patters:
 | Builder                     | Builds complex queries step by step                    | Query Builder, Eloquent       |
 | Adapter                     | Makes incompatible interfaces work together            | Cache drivers, Mail drivers   |
 | Service Container (IoC)     | Manages class dependencies automatically               | `app()->make()`               |
+
+
+PHP OOPS
+=========
+For a **10-year experienced PHP developer**, interviewers usually ask OOPs concepts deeply but expect practical answers.
+
+# 1. What is OOP in PHP?
+
+**Definition:**
+OOP (Object-Oriented Programming) is a way of writing code using **Classes and Objects**.
+
+**Real-Life Example:**
+Blueprint = Class
+House built from blueprint = Object
+
+```php
+class Car {
+    public $color = "Red";
+}
+
+$car = new Car();
+echo $car->color;
+```
+
+---
+
+# 2. What is a Class?
+
+**Definition:**
+A class is a blueprint/template for creating objects.
+
+```php
+class Employee {
+    public $name;
+}
+```
+
+**Example:**
+Employee class defines what an employee should have.
+
+---
+
+# 3. What is an Object?
+
+**Definition:**
+An object is an instance of a class.
+
+```php
+$emp = new Employee();
+```
+
+**Example:**
+Class = Employee Template
+Object = Chandan Employee
+
+---
+
+# 4. What is a Constructor?
+
+**Definition:**
+A constructor is automatically called when an object is created.
+
+```php
+class User {
+    public function __construct() {
+        echo "User Created";
+    }
+}
+
+new User();
+```
+
+**Use Case:**
+
+* DB connection
+* Load configuration
+* Initialize variables
+
+---
+
+# 5. What is a Destructor?
+
+**Definition:**
+Runs automatically when object is destroyed.
+
+```php
+class User {
+    public function __destruct() {
+        echo "Object Destroyed";
+    }
+}
+```
+
+**Use Case:**
+
+* Close files
+* Close DB connection
+* Cleanup resources
+
+---
+
+# 6. What is Encapsulation?
+
+**Definition:**
+Wrapping data and methods together and controlling access.
+
+```php
+class BankAccount {
+    private $balance = 1000;
+
+    public function getBalance() {
+        return $this->balance;
+    }
+}
+```
+
+**Benefit:**
+Prevent direct access to sensitive data.
+
+---
+
+# 7. What is Inheritance?
+
+**Definition:**
+One class acquires properties and methods of another class.
+
+```php
+class Animal {
+    public function eat() {
+        echo "Eating";
+    }
+}
+
+class Dog extends Animal {
+}
+```
+
+```php
+$dog = new Dog();
+$dog->eat();
+```
+
+**Benefit:**
+Code Reusability.
+
+---
+
+# 8. What is Polymorphism?
+
+**Definition:**
+Same method name behaves differently.
+
+```php
+class Animal {
+    public function sound() {}
+}
+
+class Dog extends Animal {
+    public function sound() {
+        echo "Bark";
+    }
+}
+
+class Cat extends Animal {
+    public function sound() {
+        echo "Meow";
+    }
+}
+```
+
+---
+
+# 9. What is Abstraction?
+
+**Definition:**
+Showing only important details and hiding implementation.
+
+```php
+abstract class Vehicle {
+    abstract public function start();
+}
+```
+
+```php
+class Car extends Vehicle {
+    public function start() {
+        echo "Car Started";
+    }
+}
+```
+
+**Example:**
+Driving a car without knowing engine internals.
+
+---
+
+# 10. What is an Interface?
+
+**Definition:**
+Defines a contract that classes must implement.
+
+```php
+interface Payment {
+    public function pay();
+}
+```
+
+```php
+class Stripe implements Payment {
+    public function pay() {
+        echo "Stripe Payment";
+    }
+}
+```
+
+**Use Case:**
+Different payment gateways.
+
+---
+
+# 11. Interface vs Abstract Class
+
+| Interface                   | Abstract Class             |
+| --------------------------- | -------------------------- |
+| Only method declaration     | Can have methods with body |
+| Multiple interfaces allowed | Single inheritance         |
+| 100% contract               | Partial implementation     |
+
+**Example:**
+
+```php
+interface PaymentGateway {}
+```
+
+```php
+abstract class PaymentGateway {}
+```
+
+---
+
+# 12. What is Method Overriding?
+
+**Definition:**
+Child class changes parent method behavior.
+
+```php
+class ParentClass {
+    public function show() {
+        echo "Parent";
+    }
+}
+
+class ChildClass extends ParentClass {
+    public function show() {
+        echo "Child";
+    }
+}
+```
+
+---
+
+# 13. What is Method Overloading?
+
+PHP does not support true method overloading.
+
+We simulate using:
+
+```php
+__call()
+```
+
+or optional parameters.
+
+```php
+function test($a, $b = null) {
+}
+```
+
+---
+
+# 14. What is Static Method?
+
+**Definition:**
+Belongs to class, not object.
+
+```php
+class Math {
+    public static function add() {
+        return 10 + 20;
+    }
+}
+
+echo Math::add();
+```
+
+**Use Case:**
+Helper classes.
+
+---
+
+# 15. What is Static Variable?
+
+```php
+class Counter {
+    public static $count = 0;
+}
+```
+
+Shared across all objects.
+
+---
+
+# 16. What is $this?
+
+**Definition:**
+Refers to current object.
+
+```php
+class User {
+    public $name = "John";
+
+    public function show() {
+        echo $this->name;
+    }
+}
+```
+
+---
+
+# 17. What is self:: ?
+
+**Definition:**
+Used to access static members inside same class.
+
+```php
+class Test {
+    public static $name = "PHP";
+
+    public static function show() {
+        echo self::$name;
+    }
+}
+```
+
+---
+
+# 18. Difference Between self and $this
+
+| self         | $this          |
+| ------------ | -------------- |
+| Static       | Current Object |
+| Compile Time | Runtime        |
+| self::       | $this->        |
+
+---
+
+# 19. What is Final Keyword?
+
+**Definition:**
+Prevents inheritance or overriding.
+
+```php
+final class Payment {
+}
+```
+
+```php
+final public function pay() {
+}
+```
+
+---
+
+# 20. What is Trait?
+
+**Definition:**
+Allows code reuse when multiple inheritance is not available.
+
+```php
+trait Logger {
+    public function log() {
+        echo "Logging";
+    }
+}
+
+class User {
+    use Logger;
+}
+```
+
+---
+
+# 21. What is Dependency Injection (DI)?
+
+**Definition:**
+Passing dependency from outside instead of creating inside class.
+
+❌ Bad
+
+```php
+class Order {
+    private $db;
+
+    public function __construct() {
+        $this->db = new Database();
+    }
+}
+```
+
+✅ Good
+
+```php
+class Order {
+    private $db;
+
+    public function __construct(Database $db) {
+        $this->db = $db;
+    }
+}
+```
+
+**Benefit:**
+
+* Loose Coupling
+* Easy Testing
+
+---
+
+# 22. What is Composition?
+
+**Definition:**
+One class contains another class.
+
+```php
+class Engine {
+}
+
+class Car {
+    private $engine;
+
+    public function __construct() {
+        $this->engine = new Engine();
+    }
+}
+```
+
+**Relationship:**
+Car HAS-A Engine.
+
+---
+
+# 23. What is Association?
+
+**Definition:**
+One object uses another object.
+
+```php
+class Customer {
+}
+
+class Order {
+    public function place(Customer $customer) {
+    }
+}
+```
+
+**Relationship:**
+Order USES Customer.
+
+---
+
+# 24. What is Namespace?
+
+**Definition:**
+Avoids class name conflicts.
+
+```php
+namespace App\Services;
+
+class User {
+}
+```
+
+Usage:
+
+```php
+use App\Services\User;
+```
+
+---
+
+# 25. What is Autoloading?
+
+**Definition:**
+Automatically loads class files when needed.
+
+```php
+spl_autoload_register();
+```
+
+Modern PHP uses Composer:
+
+```bash
+composer dump-autoload
+```
+
+---
+
+# 26. What is Late Static Binding?
+
+**Definition:**
+Allows child class static method resolution at runtime.
+
+```php
+class ParentClass {
+    public static function test() {
+        static::who();
+    }
+}
+```
+
+```php
+class Child extends ParentClass {
+    public static function who() {
+        echo "Child";
+    }
+}
+```
+
+---
+
+# 27. What are Magic Methods?
+
+| Method        | Purpose                      |
+| ------------- | ---------------------------- |
+| __construct() | Constructor                  |
+| __destruct()  | Destructor                   |
+| __get()       | Access inaccessible property |
+| __set()       | Set inaccessible property    |
+| __call()      | Call undefined method        |
+| __toString()  | Object to string             |
+| __invoke()    | Object as function           |
+
+Example:
+
+```php
+class User {
+    public function __toString() {
+        return "User Object";
+    }
+}
+```
+
+---
+
+# 28. What are SOLID Principles?
+
+### S - Single Responsibility
+
+One class = One responsibility
+
+### O - Open Closed
+
+Open for extension, closed for modification
+
+### L - Liskov Substitution
+
+Child should replace parent without breaking code
+
+### I - Interface Segregation
+
+Small interfaces are better
+
+### D - Dependency Inversion
+
+Depend on abstraction, not concrete class
+
+---
+
+# Most Asked Senior PHP Interview One-Liners
+
+**Q: Why use OOP?**
+→ Reusability, maintainability, scalability.
+
+**Q: HAS-A vs IS-A?**
+→ Composition = HAS-A, Inheritance = IS-A.
+
+**Q: Interface or Abstract Class?**
+→ Interface for contract, Abstract for shared code.
+
+**Q: Why Dependency Injection?**
+→ Loose coupling and easier testing.
+
+**Q: Trait vs Inheritance?**
+→ Trait shares code, Inheritance shares behavior.
+
+**Q: What is Encapsulation?**
+→ Hide data using private/protected access.
+
+**Q: What is Polymorphism?**
+→ Same method, different behavior.
+
+**Q: What is Abstraction?**
+→ Hide implementation details.
+
+These are the OOP questions most commonly asked for Senior PHP Developer (8–12 years experience) interviews.
+
 
 
 ===================================
@@ -4009,52 +4619,5 @@ Use the following artisan command in Laravel to generate request:
 
 php artisan make:request UploadFileRequest
 These interview questions will also help in wer viva(orals)
-
-we Might Like:
-PHP Registration Form using GET, POST Methods with Example
-PHP Session & PHP Cookies with Example
-PHP File() Handling & Functions
-PHP Tutorial for Beginners: Learn in 7 Days
-CakePHP Tutorial for Beginners: What is CakePHP Framework?
-Post navigation
-Report a Bug
-Prev
-Next
-
-
-
-
-Top Tutorials
-
-About
-About Us
-Advertise with Us
-Write For Us
-Contact Us
-Python
-Testing
-Hacking
-Career Suggestion
-SAP Career Suggestion Tool
-Software Testing as a Career
-
-Interesting
-eBook
-Blog
-Quiz
-SAP eBook
-SAP
-Java
-SQL
-Execute online
-Execute Java Online
-Execute Javascript
-Execute HTML
-Execute Python
-Selenium
-Build Website
-VPNs
-
-© Copyright - Guru99 2023         Privacy Policy  |  Affiliate Disclaimer  |  ToS
 
 
