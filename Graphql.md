@@ -139,37 +139,63 @@ One-Line Interview Answers
 ===================================
 
 GraphQL → Query language for APIs.
+
 Query → Read data.
+
 Mutation → Create/Update/Delete data.
+
 Subscription → Real-time data updates.
+
 Schema → Blueprint of GraphQL API.
+
 Type → Data structure definition.
+
 Field → Property of a type.
+
 Variable → Dynamic query parameter.
+
 Resolver → Function that fetches data.
+
 Over-fetching → Getting extra data.
+
 Under-fetching → Multiple API calls to get required data.
+
 Shopify GraphQL → Preferred API for products, orders, customers, inventory, and metafields.
 
 
 | Concept         | One-Line Answer                        |
 | --------------- | -------------------------------------- |
-| GraphQL         | Query language for APIs                |
-| Query           | Fetch data                             |
-| Mutation        | Create, Update, Delete data            |
-| Subscription    | Real-time updates                      |
-| Schema          | Blueprint of API                       |
-| Type            | Data structure                         |
-| Field           | Property of a Type                     |
-| Variable        | Dynamic parameter                      |
-| Resolver        | Function that fetches data             |
-| Over-Fetching   | Extra unwanted data                    |
-| Under-Fetching  | Multiple API requests needed           |
-| Shopify GraphQL | Shopify's preferred API for store data |
-| Edge            | Wrapper around data node               |
-| Node            | Actual object data                     |
-| GID             | Global Shopify ID                      |
-| Cursor          | Pagination pointer                     |
+| GraphQL         | Query language for APIs 
+               
+| Query           | Fetch data           
+                  |
+| Mutation        | Create, Update, Delete data     
+
+| Subscription    | Real-time updates  
+
+| Schema          | Blueprint of API     
+                  |
+| Type            | Data structure     
+
+| Field           | Property of a Type   
+                  |
+| Variable        | Dynamic parameter    
+                  |
+| Resolver        | Function that fetches data    
+
+| Over-Fetching   | Extra unwanted data    
+
+| Under-Fetching  | Multiple API requests needed         
+
+| Shopify GraphQL | Shopify's preferred API for store data
+
+| Edge            | Wrapper around data node    
+
+| Node            | Actual object data      
+               
+| GID             | Global Shopify ID  
+                    
+| Cursor          | Pagination pointer                     
 
 Shopify GraphQL Flow:
 ======================
