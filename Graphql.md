@@ -1,10 +1,27 @@
 Q: Why is GraphQL better than REST in Shopify?
 ===============================================
 Answer:
-
 GraphQL allows us to fetch exactly the required fields, reduces over-fetching and under-fetching, uses a single endpoint, supports efficient pagination, and improves performance. That's why Shopify recommends GraphQL Admin API for products, orders, customers, inventory, collections, and metafields.
 
+Example:
 
+
+query {
+  products(first:5) {
+    edges {
+      node {
+        id
+        title
+      }
+    }
+  }
+}
+
+
+first = limit from beginning
+last  = limit from end
+after = start after this cursor
+before = start before this cursor
 
 Q: How many endpoints does Shopify GraphQL Admin API have?
 ===========================================================
@@ -83,12 +100,14 @@ products
  │          ├── id
  │          └── title
 ```
+cursor:
+=======
+Used for cursor-based pagination (after, before, first, last).
+
 
 
 What is Node?
 ===============
-Definition
-
 A Node contains the actual data/object.
 
 Example:
@@ -549,6 +568,12 @@ query {
     }
   }
 }
+
+
+first = limit from beginning
+last  = limit from end
+after = start after this cursor
+before = start before this cursor
 
 
 ---
