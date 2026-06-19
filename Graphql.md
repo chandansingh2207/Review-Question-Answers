@@ -75,12 +75,14 @@ Node = Actual Data
 
 Edge = Data + Cursor
 
+```text
 products
  ├── edge
  │     ├── cursor
  │     └── node
  │          ├── id
  │          └── title
+```
 
 
 What is Node?
