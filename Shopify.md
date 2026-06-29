@@ -1,4 +1,20 @@
 
+How do you implement multilingual stores?
+==========================================
+Use
+
+Shopify Markets
+Language resources (locales)
+Translation apps or APIs if required
+
+Example
+
+{{ 'general.search' | t }}
+Interview Answer
+
+I enable multiple languages using Shopify Markets and translation resources. I store translatable text in locale files and use Liquid translation filters. I also verify translated URLs, SEO metadata, and currency settings for each market.
+
+
 🛒 Shopify 2.0 (Official)
 =============================
 
